@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "TDMU-QuizChat",
-    "slug": "TDMU-QuizChat",
+    "name": "TDMU-eLearn-Quiz",
+    "slug": "TDMU-eLearn-Quiz",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "../TDMU-eLearn-Quiz/src/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "../TDMU-eLearn-Quiz/src/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "../TDMU-eLearn-Quiz/src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "../TDMU-eLearn-Quiz/src/assets/favicon.png"
     }
   }
 }
