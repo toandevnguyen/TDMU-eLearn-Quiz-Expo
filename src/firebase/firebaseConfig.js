@@ -1,12 +1,6 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-import 'firebase/firestore';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import firebase from "firebase/compat/app";
+import 'firebase/compat/firestore';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBOB_Njd40Dj8g5JvsrBASsfGzrkfC2Ris",
   authDomain: "tdmu-quizchat.firebaseapp.com",
@@ -17,7 +11,7 @@ const firebaseConfig = {
   measurementId: "G-5N3BYTX8LH"
 };
 
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-
-// const analytics = getAnalytics(app);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+export { firebase };

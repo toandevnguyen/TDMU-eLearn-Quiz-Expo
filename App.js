@@ -2,11 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from '@react-navigation/native';
-import index from './src/screens';
-import Playground from './src/screens/Playground';
+import Playground from './src/navigators/Playground';
 import React from 'react';
-import SplashScreen from './src/screens/SplashScreen';
-import AuthNavigator from './src/navigators/AuthNavigator';
+import { HomeScreen, SplashScreen } from './src/screens';
+import { AuthNavigator, MainNavigator } from './src/navigators';
 
 
 const NativeStack = createNativeStackNavigator();
@@ -22,7 +21,7 @@ export default function App() {
   }, [])
 
 
-  return (isShowSplashScr ? (<SplashScreen />) : (<AuthNavigator />)
+  return (isShowSplashScr ? (<SplashScreen />) : (<MainNavigator />)
 
     // <NavigationContainer>
     //   <NativeStack.Navigator>
