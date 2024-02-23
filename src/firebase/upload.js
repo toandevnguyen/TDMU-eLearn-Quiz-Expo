@@ -1,11 +1,12 @@
 const admin = require("firebase-admin");
+
+const data = require("./data.json");
 const serviceAccount = require("./serviceAccKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 const db = admin.firestore();
-const data = require("./data.json");
 
 async function uploadData() {
   for (const doc of data) {

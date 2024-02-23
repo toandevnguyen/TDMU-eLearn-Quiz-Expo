@@ -45,6 +45,7 @@ export default function Playground({ route }) {
     });
     setScore(correctAnswers);
     setShowResults(true);
+
   };
 
   return (
@@ -115,26 +116,27 @@ export default function Playground({ route }) {
             >
               <Text>{item.option4}</Text>
             </TouchableOpacity>
-            {showResults && (
-              <View style={styles.result}>
-                <Text style={styles.resultText}>Your scored {score} out of {questions.length}</Text>
-                <TouchableOpacity style={styles.tryAgainButton}
-                  onPress={getQuestions}
-                >
-                  <Text style={styles.tryAgainButtonText}>Try again</Text>
-                </TouchableOpacity>
-              </View>
-            )}
+
           </View>
         )}
       />
-      <TouchableOpacity style={styles.submitButton}
-        onPress={handleSubmit}
-        disabled={showResults}
-      >
-        <Text style={styles.submitButtonText}>Submit</Text>
-      </TouchableOpacity>
-
+      {!showResults ? (
+        <TouchableOpacity style={styles.submitButton}
+          onPress={handleSubmit}
+          disabled={showResults}
+        >
+          <Text style={styles.submitButtonText}>Submit</Text>
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.result}>
+          <Text style={styles.resultText}>Your scored {score} out of {questions.length}</Text>
+          <TouchableOpacity style={styles.tryAgainButton}
+            onPress={getQuestions}
+          >
+            <Text style={styles.tryAgainButtonText}>Try again</Text>
+          </TouchableOpacity>
+        </View>
+      )}
 
     </View>
   );
@@ -144,7 +146,71 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    alignContent: "center",
+    alignItems: "center",
     justifyContent: "center",
   },
+  questionContainer: {
+    backgroundColor: '#F5F5F5',
+    borderRadius: 10,
+    marginBottom: 20,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  question: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginVertical: 10,
+  },
+  option: {
+    backgroundColor: '#eeee',
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 5,
+  },
+  selectedOptions: {
+    backgroundColor: '#949494'
+  },
+  correctOption: {
+    backgroundColor: 'rgb(23, 211, 108)'
+  },
+  wrongOption: {
+    backgroundColor: 'rgb(255, 75, 3)'
+  },
+  submitButton: {
+    backgroundColor: 'rgb(6, 175, 248)',
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 5,
+  },
+  submitButtonText: {
+    color: 'rgb(255, 255, 255)',
+    fontSize: 20,
+  },
+  result: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  resultText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginVertical: 10,
+  },
+  tryAgainButton: {
+    backgroundColor: 'rgb(6, 175, 248)',
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 5,
+
+  },
+  tryAgainButtonText: {
+    color: '#fff',
+    fontSize: 20,
+  }
 });
