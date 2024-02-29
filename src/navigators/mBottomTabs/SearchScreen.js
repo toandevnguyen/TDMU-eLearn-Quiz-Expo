@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function LoginScreen() {
+export default function SearchScreen() {
   return (
     <View>
-      <Text>LoginScreen</Text>
+      <Text>SearchScreen</Text>
     </View>
   );
 }

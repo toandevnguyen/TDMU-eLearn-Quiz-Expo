@@ -1,5 +1,5 @@
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import React from "react";
 
 export default function SplashScreen() {
   return (
@@ -7,13 +7,13 @@ export default function SplashScreen() {
       <Text>SplashScreen</Text>
       <ActivityIndicator />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-})
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function LoginScreen() {
+export default function ChatAiScreen() {
   return (
     <View>
-      <Text>LoginScreen</Text>
+      <Text>ChatAI</Text>
     </View>
   );
 }

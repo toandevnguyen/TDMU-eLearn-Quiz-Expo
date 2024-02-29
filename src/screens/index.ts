@@ -1,6 +1,5 @@
+import ChatAiScreen from "./ChatAiScreen";
 import SplashScreen from "./SplashScreen";
 import LoginScreen from "./auth/LoginScreen";
-import HomeScreen from "./home/HomeScreen";
 
-export { SplashScreen, LoginScreen, HomeScreen }
-
+export { SplashScreen, LoginScreen, ChatAiScreen };
