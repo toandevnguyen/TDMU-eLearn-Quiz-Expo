@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-03-27T07:41:57.614Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="W1u-HbLP73l9Cxz_RTgI" version="24.1.0" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2024-03-27T08:13:35.065Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="GhOIrHerfcX592oamjtO" version="24.1.0" type="github" pages="5">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Use-Case Người dùng">
     <mxGraphModel dx="2497" dy="5282" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -92,7 +92,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="e76yvH0vZ8qXHF4V_3Pj" name="Trang-2">
-    <mxGraphModel dx="941" dy="504" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="335" dy="504" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -105,7 +105,7 @@
         <mxCell id="PXpyICkiRFds_3PQUqST-1" value="Todo" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
           <mxGeometry x="50" y="70" width="430" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="PXpyICkiRFds_3PQUqST-2" value="&lt;div style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;id: int (Mã định danh của công việc)&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;title: string (Tiêu đề của công việc)&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;descripton: string (Chi tiết công việc)&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;due_date: string (Ngày đến hạng của công việc)&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;priority: int (Mức độ ưu tiên của công việc (1 - cao nhất, 5 - thấp nhất)&amp;nbsp;)&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;status: string (Trạng thái của công việc (mới, đang thực hiện, hoàn thành)&amp;nbsp;)&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="PXpyICkiRFds_3PQUqST-1">
+        <mxCell id="PXpyICkiRFds_3PQUqST-2" value="&lt;div style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;id: int (Mã định danh của công việc)&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;title: string (Tiêu đề của công việc)&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;descripton: string (Chi tiết công việc)&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;due_date: string (Ngày đến hạng của công việc)&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;priority: int (Mức độ ưu tiên của công việc (1 - cao nhất, 5 - thấp nhất)&amp;nbsp;)&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;status: string (Trạng thái của công việc (mới, đang thực hiện, hoàn thành)&amp;nbsp;)&lt;/div&gt;&lt;div style=&quot;text-align: justify;&quot;&gt;user_id: int&lt;/div&gt;" style="align=center;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="PXpyICkiRFds_3PQUqST-1">
           <mxGeometry y="50" width="430" height="120" as="geometry" />
         </mxCell>
         <mxCell id="PXpyICkiRFds_3PQUqST-3" value="User" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
