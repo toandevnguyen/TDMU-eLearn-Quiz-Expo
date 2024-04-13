@@ -1,4 +1,12 @@
+import {
+  useFonts,
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+} from "@expo-google-fonts/roboto";
+import AppLoading from "expo-app-loading";
 import React from "react";
+import { ActivityIndicator } from "react-native";
 
 import { MBottomTabNavigator } from "./src/navigators";
 import { SplashScreen } from "./src/screens";
@@ -14,7 +22,23 @@ export default function App() {
     return () => clearTimeout(timeout);
   }, []);
 
-  return isShowSplashScr ? <SplashScreen /> : <MBottomTabNavigator />;
+  const [fontLoaded] = useFonts({
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold,
+  });
+
+  if (!fontLoaded) {
+    return <ActivityIndicator />;
+  } else {
+    return isShowSplashScr ? <SplashScreen /> : <MBottomTabNavigator />;
+    // <>
+    //   <StatusBar hidden />
+    //   <Router />
+    // </>
+  }
+
+  // return isShowSplashScr ? <SplashScreen /> : <MBottomTabNavigator />;
 
   // <NavigationContainer>
   //   <NativeStack.Navigator>
