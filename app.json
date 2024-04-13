@@ -5,9 +5,9 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "../TDMU-eLearn-Quiz/src/assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "../TDMU-eLearn-Quiz/src/assets/splash.png",
+      "image": "../TDMU-eLearn-Quiz/src/assets/SplashScreenImg.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -25,6 +25,9 @@
     },
     "web": {
       "favicon": "../TDMU-eLearn-Quiz/src/assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
