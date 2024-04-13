@@ -4,12 +4,11 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
-import AppLoading from "expo-app-loading";
 import React from "react";
 import { ActivityIndicator } from "react-native";
 
 import { MBottomTabNavigator } from "./src/navigators";
-import { SplashScreen } from "./src/screens";
+import { LoginScreen, SplashScreen } from "./src/screens";
 
 export default function App() {
   const [isShowSplashScr, setIsShowSplashScr] = React.useState(true);
@@ -31,7 +30,7 @@ export default function App() {
   if (!fontLoaded) {
     return <ActivityIndicator />;
   } else {
-    return isShowSplashScr ? <SplashScreen /> : <MBottomTabNavigator />;
+    return isShowSplashScr ? <SplashScreen /> : <LoginScreen />;
     // <>
     //   <StatusBar hidden />
     //   <Router />

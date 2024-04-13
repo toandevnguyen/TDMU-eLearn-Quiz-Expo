@@ -1,6 +1,7 @@
 /** @format */
 
 import { StyleSheet } from "react-native";
+
 import { colors } from "../constants/colors";
 import { fontFamilies } from "../constants/fontFamilies";
 

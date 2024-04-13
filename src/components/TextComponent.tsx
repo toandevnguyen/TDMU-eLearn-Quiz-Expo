@@ -13,6 +13,9 @@ interface Props {
   type?: "title" | "description";
   styles?: StyleProp<TextStyle>;
   flex?: number;
+  flexWrap?: string;
+  alignItem?: string;
+  numberOfLines?: number;
 }
 
 const TextComponent = (props: Props) => {

@@ -94,8 +94,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   categoryTitle: {
+    fontFamily: "Roboto_700Bold",
     fontSize: 20,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     textAlign: "center",
     color: "rgb(255, 255, 255)",
   },

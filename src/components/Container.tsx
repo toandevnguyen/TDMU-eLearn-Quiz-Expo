@@ -1,16 +1,17 @@
 /** @format */
 
+import React, { ReactNode } from "react";
 import {
   View,
-  Text,
+  // Text,
   StyleProp,
   ViewStyle,
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import React, { ReactNode } from "react";
-import { globalStyles } from "../styles/globalStyles";
+
 import { colors } from "../constants/colors";
+import { globalStyles } from "../styles/globalStyles";
 
 interface Props {
   children: ReactNode;

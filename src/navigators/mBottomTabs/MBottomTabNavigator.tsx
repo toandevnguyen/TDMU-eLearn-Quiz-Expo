@@ -1,23 +1,25 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+import CalendarScreen from "./CalendarTab/CalendarScreen";
 import DocumentsScreen from "./DocumentsScreen";
-import MTopTabsNavigator from "../mTopTabs/MTopTabsNavigator";
-import CalendarScreen from "./CalendarScreen";
 import SearchScreen from "./SearchScreen";
 import SettingScreen from "./SettingScreen";
+import MTopTabsNavigator from "../mTopTabs/MTopTabsNavigator";
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function MBottomTabNavigator() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <StatusBar />
       <NavigationContainer>
         <Tab.Navigator
           initialRouteName="Home"
-          activeColor="rgb(6, 175, 248)"
+          activeColor="#06aff8"
           // barStyle={{ backgroundColor: "rgb(6, 175, 248)" }}
         >
           <Tab.Screen
@@ -25,6 +27,7 @@ export default function MBottomTabNavigator() {
             component={MTopTabsNavigator}
             options={{
               tabBarLabel: "Home",
+
               tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name="home" color={color} size={26} />
               ),

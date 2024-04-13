@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 
 import GeneralSubjectsScreen from "./GeneralSubjectsScreen";
 import PlaygroundScreen from "./PlaygroundScreen";
+import { fontFamilies } from "../../constants/fontFamilies";
 
 export default function ItSubjectsNavigator({ route }) {
   const NativeStack = createNativeStackNavigator();
