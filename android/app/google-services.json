@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "727064933607",
+    "project_id": "tdmu-quizchat",
+    "storage_bucket": "tdmu-quizchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727064933607:android:6dbae71f0ce45885fc5e42",
+        "android_client_info": {
+          "package_name": "tdmu.elearn.quiz.toan.dev.nguyen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727064933607-f4dmpcvd1ebe6485v1jnsp01c2gv4hvu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tdmu.elearn.quiz.toan.dev.nguyen",
+            "certificate_hash": "d1c5794cb3b6383fa0d12725359c246c213137ba"
+          }
+        },
+        {
+          "client_id": "727064933607-m74ef5r87h41qqgekdc84joi1em82f7k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tdmu.elearn.quiz.toan.dev.nguyen",
+            "certificate_hash": "b4b213164aeaddbf3141cd14fccf38d6b560ab70"
+          }
+        },
+        {
+          "client_id": "727064933607-sibinqt89eh0g7glqrau2jo42jc8dmpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBejRaggZtp_mbleS2a5UYjIuJjA7yc2eA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727064933607-sibinqt89eh0g7glqrau2jo42jc8dmpe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
