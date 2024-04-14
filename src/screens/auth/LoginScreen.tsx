@@ -1,15 +1,16 @@
+import { FontAwesome5 } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Image, StatusBar, StyleSheet, Text, View } from "react-native";
+
 import {
   ButtonComponent,
   Container,
   Section,
   TextComponent,
 } from "../../components";
-import { globalStyles } from "../../styles/globalStyles";
-import { fontFamilies } from "../../constants/fontFamilies";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { colors } from "../../constants/colors";
+import { fontFamilies } from "../../constants/fontFamilies";
+import { globalStyles } from "../../styles/globalStyles";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ export default function LoginScreen() {
     <Container>
       <Image
         source={require("../../assets/images/LoginScreenImg.png")}
-        resizeMode="contain"
+        resizeMode="cover"
         style={{ width: "100%", height: 220 }}
       />
       <View style={styles.container}>
@@ -33,7 +34,7 @@ export default function LoginScreen() {
           }}
         />
         <TextComponent
-          text={"Đăng nhập/Đăng ký!"}
+          text="Đăng nhập/Đăng ký!"
           type="description"
           color="black"
           font={fontFamilies.bold}
@@ -53,7 +54,7 @@ export default function LoginScreen() {
             marginBottom: 230,
             paddingHorizontal: 20,
           }}
-          text="   Đăng nhập bằng Google "
+          text="   Đăng nhập bằng Google"
         />
       </View>
     </Container>
