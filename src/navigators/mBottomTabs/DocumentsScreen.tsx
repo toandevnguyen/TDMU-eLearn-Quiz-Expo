@@ -8,8 +8,8 @@ export default function DocumentsScreen() {
   return (
     <View style={styles.container}>
       <Text>DocumentScreen</Text>
-      <DateTimePickerComponent />
-      <View style={styles.bottomRight}>
+      {/* <DateTimePickerComponent /> */}
+      {/* <View style={styles.bottomRight}>
         <Image
           placeholderStyle={styles.bottomRight}
           source={require("../../assets/gif/plus-no-bkg.gif")}
@@ -17,7 +17,7 @@ export default function DocumentsScreen() {
           style={styles.item}
           // PlaceholderContent={<ActivityIndicator />}
         />
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    position: "relative", // Đảm bảo phần tử con có thể sử dụng position: "absolute"
+    // position: "relative",
+    alignItems: "center", // Đảm bảo phần tử con có thể sử dụng position: "absolute"
   },
   bottomRight: {
     position: "absolute",

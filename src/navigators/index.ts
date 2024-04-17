@@ -1,5 +1,6 @@
 import AuthNavigator from "./AuthNavigator";
-import CalendarScreen from "./mBottomTabs/CalendarTab/CalendarScreen";
+import Route from "./Route";
+import CalendarScreen from "./mBottomTabs/CalendarScreen";
 import DocumentsScreen from "./mBottomTabs/DocumentsScreen";
 import MBottomTabNavigator from "./mBottomTabs/MBottomTabNavigator";
 import SearchScreen from "./mBottomTabs/SearchScreen";
@@ -24,4 +25,5 @@ export {
   SearchScreen,
   SettingScreen,
   MBottomTabNavigator,
+  Route,
 };

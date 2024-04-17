@@ -19,5 +19,3 @@ export default function AuthNavigator() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({});

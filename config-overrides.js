@@ -1,5 +1,5 @@
-const path = require("path");
 const { override, addBabelPlugins, babelInclude } = require("customize-cra");
+const path = require("path");
 
 module.exports = override(
   ...addBabelPlugins("@babel/plugin-proposal-class-properties"),

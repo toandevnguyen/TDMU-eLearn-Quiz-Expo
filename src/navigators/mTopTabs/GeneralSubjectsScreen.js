@@ -12,7 +12,7 @@ export default function GeneralSubjectsScreen() {
           style={styles.category}
           onPress={() =>
             navigation.navigate(
-              "Playground",
+              "PlaygroundScreen",
               { category: "Triết học" },
               // { title: "Triết học" },
             )
@@ -23,7 +23,7 @@ export default function GeneralSubjectsScreen() {
         <TouchableOpacity
           style={styles.category}
           onPress={() =>
-            navigation.navigate("Playground", { category: "Triết học" })
+            navigation.navigate("PlaygroundScreen", { category: "Triết học" })
           }
         >
           <Text style={styles.categoryTitle}>Kinh tế chính trị</Text>
@@ -31,7 +31,7 @@ export default function GeneralSubjectsScreen() {
         <TouchableOpacity
           style={styles.category}
           onPress={() =>
-            navigation.navigate("Playground", { category: "Triết học" })
+            navigation.navigate("PlaygroundScreen", { category: "Triết học" })
           }
         >
           <Text style={styles.categoryTitle}>Pháp luật</Text>
@@ -39,7 +39,7 @@ export default function GeneralSubjectsScreen() {
         <TouchableOpacity
           style={styles.category}
           onPress={() =>
-            navigation.navigate("Playground", { category: "Triết học" })
+            navigation.navigate("PlaygroundScreen", { category: "Triết học" })
           }
         >
           <Text style={styles.categoryTitle}>Đông Nam bộ</Text>
@@ -47,18 +47,18 @@ export default function GeneralSubjectsScreen() {
         <TouchableOpacity
           style={styles.category}
           onPress={() =>
-            navigation.navigate("Playground", { category: "Triết học" })
+            navigation.navigate("PlaygroundScreen", { category: "Triết học" })
           }
         >
-          <Text style={styles.categoryTitle}>Kiến trúc máy tính</Text>
+          <Text style={styles.categoryTitle}>{"Tư Tưởng\nHồ Chí Minh"}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.category}
           onPress={() =>
-            navigation.navigate("Playground", { category: "Triết học" })
+            navigation.navigate("PlaygroundScreen", { category: "Triết học" })
           }
         >
-          <Text style={styles.categoryTitle}>Mạng máy tính</Text>
+          <Text style={styles.categoryTitle}>Lịch sử Đảng</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -68,7 +68,7 @@ export default function GeneralSubjectsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgb(6, 225, 249)",
+    // backgroundColor: "rgb(6, 225, 249)",
     // alignItems: 'center',
     // justifyContent: 'center',
   },

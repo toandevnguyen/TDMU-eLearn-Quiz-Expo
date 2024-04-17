@@ -11,7 +11,7 @@ export default function GeneralSubjectsNavigator({ route }) {
 
   return (
     <NativeStack.Navigator
-      initialRouteName="Home"
+      initialRouteName="GeneralSubjectsScreen"
       screenOptions={{
         headerShown: true,
         // headerTintColor: 'white',
@@ -20,11 +20,11 @@ export default function GeneralSubjectsNavigator({ route }) {
     >
       <NativeStack.Screen
         options={{ headerShown: false }}
-        name="TDMU-eLearn-Quiz"
+        name="GeneralSubjectsScreen"
         component={GeneralSubjectsScreen}
       />
       <NativeStack.Screen
-        name="Playground"
+        name="PlaygroundScreen"
         component={PlaygroundScreen}
         options={{
           title: "Triết học",
@@ -33,5 +33,3 @@ export default function GeneralSubjectsNavigator({ route }) {
     </NativeStack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({});

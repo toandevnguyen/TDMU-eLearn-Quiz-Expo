@@ -12,53 +12,53 @@ export default function ItSubjectsScreen() {
           style={styles.category}
           onPress={() =>
             navigation.navigate(
-              "Playground",
+              "PlaygroundScreen",
               { category: "Triết học" },
               // { title: "Triết học" },
             )
           }
         >
-          <Text style={styles.categoryTitle}>Triết học</Text>
+          <Text style={styles.categoryTitle}>Lập trình C</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.category}
           onPress={() =>
-            navigation.navigate("Playground", { category: "Triết học" })
+            navigation.navigate("PlaygroundScreen", { category: "Triết học" })
           }
         >
-          <Text style={styles.categoryTitle}>Kinh tế chính trị</Text>
+          <Text style={styles.categoryTitle}>Ngôn ngữ HTML</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.category}
           onPress={() =>
-            navigation.navigate("Playground", { category: "Triết học" })
+            navigation.navigate("PlaygroundScreen", { category: "Triết học" })
           }
         >
-          <Text style={styles.categoryTitle}>Pháp luật</Text>
+          <Text style={styles.categoryTitle}>Lập trình OOP </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.category}
           onPress={() =>
-            navigation.navigate("Playground", { category: "Triết học" })
+            navigation.navigate("PlaygroundScreen", { category: "Triết học" })
           }
         >
-          <Text style={styles.categoryTitle}>Đông Nam bộ</Text>
+          <Text style={styles.categoryTitle}>Ngôn ngữ CSS</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.category}
           onPress={() =>
-            navigation.navigate("Playground", { category: "Triết học" })
+            navigation.navigate("PlaygroundScreen", { category: "Triết học" })
           }
         >
-          <Text style={styles.categoryTitle}>Kiến trúc máy tính</Text>
+          <Text style={styles.categoryTitle}>{"Kiến trúc\nmáy tính"}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.category}
           onPress={() =>
-            navigation.navigate("Playground", { category: "Triết học" })
+            navigation.navigate("PlaygroundScreen", { category: "Triết học" })
           }
         >
-          <Text style={styles.categoryTitle}>Mạng máy tính</Text>
+          <Text style={styles.categoryTitle}>Ngôn ngữ JS</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -11,12 +11,12 @@ export default function MTopTabsNavigator() {
     <MTopTab.Navigator>
       <MTopTab.Screen
         options={{ title: "Các môn đại cương" }}
-        name="Home"
+        name="GeneralSubjectsNavigator"
         component={GeneralSubjectsNavigator}
       />
       <MTopTab.Screen
         options={{ title: "Các môn công nghệ" }}
-        name="Settings"
+        name="ItSubjectsNavigator"
         component={ItSubjectsNavigator}
       />
     </MTopTab.Navigator>

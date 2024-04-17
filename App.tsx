@@ -1,3 +1,4 @@
+import "expo-dev-client";
 import {
   useFonts,
   Roboto_400Regular,
@@ -6,8 +7,10 @@ import {
 } from "@expo-google-fonts/roboto";
 import React from "react";
 import { ActivityIndicator } from "react-native";
+import { Provider } from "react-redux";
 
-import { MBottomTabNavigator } from "./src/navigators";
+import { MBottomTabNavigator, Route } from "./src/navigators";
+import { store } from "./src/redux/store";
 import { LoginScreen, SplashScreen } from "./src/screens";
 
 export default function App() {
@@ -16,7 +19,7 @@ export default function App() {
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       setIsShowSplashScr(false);
-    }, 1000);
+    }, 3000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -30,7 +33,11 @@ export default function App() {
   if (!fontLoaded) {
     return <ActivityIndicator />;
   } else {
-    return isShowSplashScr ? <SplashScreen /> : <LoginScreen />;
+    return (
+      <Provider store={store}>
+        {isShowSplashScr === true ? <SplashScreen /> : <Route />}
+      </Provider>
+    );
     // <>
     //   <StatusBar hidden />
     //   <Router />

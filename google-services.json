@@ -7,26 +7,34 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:727064933607:android:6dbae71f0ce45885fc5e42",
+        "mobilesdk_app_id": "1:727064933607:android:6688150f623c8982fc5e42",
         "android_client_info": {
-          "package_name": "tdmu.elearn.quiz.toan.dev.nguyen"
+          "package_name": "com.tontapcode.TDMUeLearnQuiz"
         }
       },
       "oauth_client": [
         {
-          "client_id": "727064933607-f4dmpcvd1ebe6485v1jnsp01c2gv4hvu.apps.googleusercontent.com",
+          "client_id": "727064933607-767g9id5jtovunvsubcs83c12tvcr2ph.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "tdmu.elearn.quiz.toan.dev.nguyen",
-            "certificate_hash": "d1c5794cb3b6383fa0d12725359c246c213137ba"
+            "package_name": "com.tontapcode.TDMUeLearnQuiz",
+            "certificate_hash": "b4b213164aeaddbf3141cd14fccf38d6b560ab70"
           }
         },
         {
-          "client_id": "727064933607-m74ef5r87h41qqgekdc84joi1em82f7k.apps.googleusercontent.com",
+          "client_id": "727064933607-l65adds52jnl7lral4276vhefugggcmp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "tdmu.elearn.quiz.toan.dev.nguyen",
-            "certificate_hash": "b4b213164aeaddbf3141cd14fccf38d6b560ab70"
+            "package_name": "com.tontapcode.TDMUeLearnQuiz",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "727064933607-n48imnhpl5na7rglp0dn90avocntpijg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tontapcode.TDMUeLearnQuiz",
+            "certificate_hash": "d1c5794cb3b6383fa0d12725359c246c213137ba"
           }
         },
         {
