@@ -4,10 +4,10 @@
     "slug": "TDMU-eLearn-Quiz",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "../TDMU-eLearn-Quiz/src/assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./src/assets/icon.png",
+    "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "../TDMU-eLearn-Quiz/src/assets/splash.png",
+      "image": "./src/assets/SplashScreenImg.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -15,16 +15,28 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tontapcode.TDMUeLearnQuiz"
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "../TDMU-eLearn-Quiz/src/assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.tontapcode.TDMUeLearnQuiz"
     },
     "web": {
-      "favicon": "../TDMU-eLearn-Quiz/src/assets/favicon.png"
+      "favicon": "./src/assets/favicon.png"
+    },
+    "plugins": [
+      "@react-native-google-signin/google-signin",
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d23d9d9d-f1b6-48b7-8194-1b65d3c55a30"
+      }
     }
   }
 }

@@ -1,23 +1,21 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { LoginScreen } from '../screens';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+
+import { LoginScreen } from "../screens";
 
 export default function AuthNavigator() {
-    const NativeStack = createNativeStackNavigator();
-    return (
-        <NavigationContainer>
-            <NativeStack.Navigator
-                screenOptions={{
-                    headerShown: false
-                }}
-            >
-                <NativeStack.Screen name='LoginScreen' component={LoginScreen} />
-            </NativeStack.Navigator>
-        </NavigationContainer>
-
-    )
+  const NativeStack = createNativeStackNavigator();
+  return (
+    <NavigationContainer>
+      <NativeStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <NativeStack.Screen name="LoginScreen" component={LoginScreen} />
+      </NativeStack.Navigator>
+    </NavigationContainer>
+  );
 }
-
-const styles = StyleSheet.create({})
