@@ -9,9 +9,9 @@ import React from "react";
 import { ActivityIndicator } from "react-native";
 import { Provider } from "react-redux";
 
-import { MBottomTabNavigator, Route } from "./src/navigators";
+import Router from "./src/navigators/Router";
 import { store } from "./src/redux/store";
-import { LoginScreen, SplashScreen } from "./src/screens";
+import { SplashScreen } from "./src/screens";
 
 export default function App() {
   const [isShowSplashScr, setIsShowSplashScr] = React.useState(true);
@@ -35,7 +35,7 @@ export default function App() {
   } else {
     return (
       <Provider store={store}>
-        {isShowSplashScr === true ? <SplashScreen /> : <Route />}
+        {isShowSplashScr === true ? <SplashScreen /> : <Router />}
       </Provider>
     );
     // <>
@@ -53,3 +53,5 @@ export default function App() {
   //   </NativeStack.Navigator>
   // </NavigationContainer>
 }
+
+//TODO:đang ở nhánh ToanDev

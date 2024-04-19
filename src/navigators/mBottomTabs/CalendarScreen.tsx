@@ -1,5 +1,5 @@
 import { Image, Overlay } from "@rneui/themed";
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import {
   Alert,
   StyleSheet,
@@ -8,10 +8,19 @@ import {
   TouchableOpacity,
   // Image,
 } from "react-native";
-import { Agenda, LocaleConfig } from "react-native-calendars";
+import {
+  Agenda,
+  AgendaEntry,
+  AgendaSchedule,
+  DateData,
+  LocaleConfig,
+} from "react-native-calendars";
 
 import testIDs from "../testIDs";
 
+interface State {
+  items?: AgendaSchedule;
+}
 LocaleConfig.locales["vi"] = {
   monthNames: [
     "Tháng 1",
@@ -56,33 +65,89 @@ LocaleConfig.locales["vi"] = {
 
 LocaleConfig.defaultLocale = ["vi"];
 
-const CalendarScreen = () => {
-  const [selected, setSelected] = useState("");
-  const [items, setItems] = useState(undefined);
-  const [IsOpenBottomSheet, setIsOpenBottomSheet] = useState(false);
-  const [overlayVisible, setOverlayVisible] = React.useState(false);
-  const loadItems = (day) => {
-    // Tạo một item mới cho ngày được chọn
-    const numItems = 1; // Giả sử bạn chỉ muốn một item
-    const newItems = {};
-    // const newItems = { ...items };
-    const time = day.timestamp; // Lấy timestamp của ngày được chọn
-    const strTime = timeToString(time);
-    newItems[strTime] = []; // Khởi tạo mảng cho ngày này nếu chưa có
-
-    for (let j = 0; j < numItems; j++) {
-      newItems[strTime].push({
-        name: "Item for " + strTime + " #" + j,
-        height: 50,
-        day: strTime,
-      });
-    }
-    setItems(newItems);
+export default class CalendarScreen extends Component<State> {
+  state: State = {
+    items: undefined,
   };
 
-  const renderItem = (reservation, isFirst) => {
+  // reservationsKeyExtractor = (item, index) => {
+  //   return `${item?.reservation?.day}${index}`;
+  // };
+
+  render() {
+    return (
+      <Agenda
+        testID={testIDs.agenda.CONTAINER}
+        items={this.state.items}
+        loadItemsForMonth={this.loadItems}
+        selected="2017-05-16"
+        renderItem={this.renderItem}
+        renderEmptyDate={this.renderEmptyDate}
+        rowHasChanged={this.rowHasChanged}
+        showClosingKnob
+        // markingType={'period'}
+        // markedDates={{
+        //    '2017-05-08': {textColor: '#43515c'},
+        //    '2017-05-09': {textColor: '#43515c'},
+        //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
+        //    '2017-05-21': {startingDay: true, color: 'blue'},
+        //    '2017-05-22': {endingDay: true, color: 'gray'},
+        //    '2017-05-24': {startingDay: true, color: 'gray'},
+        //    '2017-05-25': {color: 'gray'},
+        //    '2017-05-26': {endingDay: true, color: 'gray'}}}
+        // monthFormat={'yyyy'}
+        // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
+        // renderDay={this.renderDay}
+        // hideExtraDays={false}
+        // showOnlySelectedDayItems
+        // reservationsKeyExtractor={this.reservationsKeyExtractor}
+      />
+    );
+  }
+
+  loadItems = (day: DateData) => {
+    const items = this.state.items || {};
+
+    setTimeout(() => {
+      for (let i = -15; i < 85; i++) {
+        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+        const strTime = this.timeToString(time);
+
+        if (!items[strTime]) {
+          items[strTime] = [];
+
+          const numItems = Math.floor(Math.random() * 3 + 1);
+          for (let j = 0; j < numItems; j++) {
+            items[strTime].push({
+              name: "Item for " + strTime + " #" + j,
+              height: Math.max(50, Math.floor(Math.random() * 150)),
+              day: strTime,
+            });
+          }
+        }
+      }
+
+      const newItems: AgendaSchedule = {};
+      Object.keys(items).forEach((key) => {
+        newItems[key] = items[key];
+      });
+      this.setState({
+        items: newItems,
+      });
+    }, 1000);
+  };
+
+  renderDay = (day) => {
+    if (day) {
+      return <Text style={styles.customDay}>{day.getDay()}</Text>;
+    }
+    return <View style={styles.dayItem} />;
+  };
+
+  renderItem = (reservation: AgendaEntry, isFirst: boolean) => {
     const fontSize = isFirst ? 16 : 14;
     const color = isFirst ? "black" : "#43515c";
+
     return (
       <TouchableOpacity
         testID={testIDs.agenda.ITEM}
@@ -94,7 +159,7 @@ const CalendarScreen = () => {
     );
   };
 
-  const renderEmptyDate = () => {
+  renderEmptyDate = () => {
     return (
       <View style={styles.emptyDate}>
         <Text>This is empty date!</Text>
@@ -102,89 +167,17 @@ const CalendarScreen = () => {
     );
   };
 
-  const rowHasChanged = (r1, r2) => {
+  rowHasChanged = (r1: AgendaEntry, r2: AgendaEntry) => {
     return r1.name !== r2.name;
   };
 
-  const timeToString = (time) => {
+  timeToString(time: number) {
     const date = new Date(time);
-    return date.toISOString().split("T")[0]; //Ký tự "T" được sử dụng trong chuỗi đại diện cho ngày tháng theo định dạng ISO 8601 để phân tách giữa phần ngày và phần thời gian. Ví dụ: 2023-01-01T12:00:00, phương thức split sẽ cắt từ phần tử ở vị trí 0 cho đến phần tử có ký tự là "T"
-    // const hours = date.getHours();
-    // const minutes = date.getMinutes();
-    // const seconds = date.getSeconds();
-    // return `${hours}:${minutes}:${seconds}`;
-  };
-
-  return (
-    <View style={styles.container}>
-      <Agenda
-        onDayPress={(day) => {
-          setSelected(day.dateString);
-          console.log("selected day", day);
-        }}
-        markedDates={{
-          [selected]: {
-            selected: true,
-            disableTouchEvent: true,
-            marked: true,
-            // selectedColor: "rgb(6, 175, 248)",
-          },
-        }}
-        // Max amount of months allowed to scroll to the past. Default = 50
-        pastScrollRange={12}
-        // Max amount of months allowed to scroll to the future. Default = 50
-        futureScrollRange={12}
-        testID={testIDs.agenda.CONTAINER}
-        items={items}
-        loadItemsForMonth={loadItems}
-        selected={selected}
-        renderItem={renderItem}
-        renderEmptyDate={renderEmptyDate}
-        rowHasChanged={rowHasChanged}
-        hideKnob={false}
-        showClosingKnob
-        // Agenda theme
-        theme={{
-          backgroundColor: "#ffffff",
-          calendarBackground: "#ffffff",
-          textSectionTitleColor: "#b6c1cd",
-          selectedDayBackgroundColor: "#00adf5",
-          selectedDayTextColor: "#ffffff",
-          todayTextColor: "#00adf5",
-          dayTextColor: "#2d4150",
-          textDisabledColor: "#d9e",
-        }}
-      />
-      <TouchableOpacity
-        style={styles.bottomRight}
-        onPress={() => {
-          // setIsOpenBottomSheet(true);
-          console.log("Press");
-        }}
-      >
-        <Image
-          placeholderStyle={styles.bottomRight}
-          source={require("../../assets/gif/plus-no-bkg.gif")}
-          resizeMode="center"
-          style={styles.image}
-        />
-        <Overlay
-          isVisible={overlayVisible}
-          onBackdropPress={() => setOverlayVisible(!overlayVisible)}
-        >
-          {/* <AddServiceCPN /> */}
-        </Overlay>
-      </TouchableOpacity>
-      {/* <RNE_BottomSheetComponent /> */}
-    </View>
-  );
-};
+    return date.toISOString().split("T")[0];
+  }
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: "rgb(255, 255, 255)",
-  },
   item: {
     backgroundColor: "white",
     flex: 1,
@@ -206,19 +199,5 @@ const styles = StyleSheet.create({
   dayItem: {
     marginLeft: 34,
   },
-  bottomRight: {
-    position: "absolute",
-    bottom: 10,
-    right: 10,
-    width: 60, // Kích thước cố định cho phần tử con
-    height: 60,
-    backgroundColor: "rgba(8, 1, 1, 0)",
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-  },
 });
-
-export default React.memo(CalendarScreen);
 // export default CalendarScreen;
