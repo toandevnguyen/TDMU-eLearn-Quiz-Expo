@@ -13,7 +13,8 @@ export default function MTopTabsNavigator() {
       screenOptions={() => ({
         tabBarLabelStyle: {
           fontSize: 14,
-          color: colors.darkBlue,
+          // color: colors.darkBlue,
+
           fontWeight: "bold",
         },
         // tabBarItemStyle: { width: "100%" },
@@ -27,12 +28,20 @@ export default function MTopTabsNavigator() {
       })}
     >
       <MTopTab.Screen
-        options={{ title: "Các môn đại cương" }}
+        options={{
+          title: "Các môn đại cương",
+          // tabBarPressColor: colors.darkBlue,
+          tabBarActiveTintColor: colors.darkBlue,
+        }}
         name="GeneralSubjectsNavigator"
         component={GeneralSubjectsScreen}
       />
       <MTopTab.Screen
-        options={{ title: "Các môn công nghệ" }}
+        options={{
+          title: "Các môn công nghệ",
+          // tabBarPressColor: colors.darkBlue,
+          tabBarActiveTintColor: colors.darkBlue,
+        }}
         name="ItSubjectsNavigator"
         component={ItSubjectsScreen}
       />
