@@ -5,11 +5,13 @@ import { StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import CalendarScreen from "./CalendarScreen";
-import DocumentsScreen from "./DocumentsScreen";
-import SearchScreen from "./SearchScreen";
-import SettingScreen from "./SettingScreen";
-import MTopTabsNavigator from "../mTopTabs/MTopTabsNavigator";
+import {
+  CalendarScreen,
+  DocumentsScreen,
+  MTopChatTabsNavigator,
+  MTopHomeTabsNavigator,
+  SettingScreen,
+} from ".";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -25,7 +27,7 @@ export default function MBottomTabsNavigator() {
       >
         <Tab.Screen
           name="Home"
-          component={MTopTabsNavigator}
+          component={MTopHomeTabsNavigator}
           options={{
             tabBarLabel: "Home",
 
@@ -50,16 +52,12 @@ export default function MBottomTabsNavigator() {
           }}
         />
         <Tab.Screen
-          name="SearchScreen"
-          component={SearchScreen}
+          name="MTopChatTabsNavigator"
+          component={MTopChatTabsNavigator}
           options={{
-            tabBarLabel: "Tìm",
+            tabBarLabel: "ChatBot",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons
-                name="text-box-search"
-                color={color}
-                size={26}
-              />
+              <MaterialCommunityIcons name="wechat" color={color} size={26} />
             ),
           }}
         />

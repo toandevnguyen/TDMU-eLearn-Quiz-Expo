@@ -3,12 +3,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 
+import { GeneralSubjectsScreen, PlaygroundScreen } from "./mBottomTabs";
 import MBottomTabsNavigator from "./mBottomTabs/MBottomTabsNavigator";
-import GeneralSubjectsScreen from "./mTopTabs/GeneralSubjectsScreen";
-import PlaygroundScreen from "./mTopTabs/PlaygroundScreen";
 import { LoginScreen } from "../screens";
 
-export default function Route() {
+export default function Router() {
   const NativeStack = createNativeStackNavigator();
   return (
     <NavigationContainer>

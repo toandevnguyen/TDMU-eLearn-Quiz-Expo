@@ -1,9 +1,9 @@
+import { FontAwesome } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   TextInput,
-  Button,
   TouchableOpacity,
   Alert,
   StyleSheet,
@@ -15,6 +15,10 @@ import {
   DateData,
   LocaleConfig,
 } from "react-native-calendars";
+import DateTimePicker from "react-native-modal-datetime-picker";
+
+import { colors } from "../../constants/colors";
+import { COLORS } from "../../constants/theme";
 
 // import testIDs from "../testIDs";
 
@@ -65,14 +69,13 @@ LocaleConfig.defaultLocale = ["vi"];
 export default function CalendarScreen() {
   const today = new Date();
   const todayString = today.toLocaleDateString("en-CA"); // YYYY-MM-DD format
-  console.log("🚀 ~ CalendarScreen ~ todayString:", todayString);
   // convert to 'YYYY-MM-DD' format
   const [items, setItems] = useState<AgendaSchedule>({
     [todayString]: [], // initialize with today's date
   });
   const [txtInputEventName, setTxtInputNewEventName] = useState<string>();
   const [selectedDay, setSelectedDay] = useState<string>(todayString);
-
+  // const [isDatePickerVisible, setDatePickerVisibility] = useState(true);
   useEffect(() => {
     // console.log("Items have changed:", selectedDay, items);
   }, [selectedDay, items]); // Re-render khi items thay đổi
@@ -154,17 +157,25 @@ export default function CalendarScreen() {
         futureScrollRange={6}
         // pagingEnabled={true}
       />
-      <TextInput
-        style={styles.input}
-        value={txtInputEventName}
-        onChangeText={setTxtInputNewEventName}
-        placeholder="Enter event name"
-      />
-      <Button
-        title="Add Event"
-        onPress={addEvent}
-        disabled={!txtInputEventName}
-      />
+
+      <View style={styles.inputContainer}>
+        <View style={styles.txtInputContainer}>
+          <TextInput
+            style={styles.txtInput}
+            value={txtInputEventName}
+            onChangeText={setTxtInputNewEventName}
+            placeholder="Enter event name"
+          />
+          {/* <DateTimePicker /> */}
+          <TouchableOpacity
+            onPress={addEvent}
+            style={styles.btn}
+            disabled={!txtInputEventName}
+          >
+            <FontAwesome name="send" color={COLORS.primary} size={24} />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
@@ -183,11 +194,36 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 30,
   },
+  inputContainer: {
+    flexDirection: "row",
+    // backgroundColor: colors.white,
+    paddingVertical: 8,
+  },
+  txtInputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    // marginLeft: 10,
+    backgroundColor: colors.white,
+    paddingVertical: 8,
+    marginHorizontal: 5,
+    borderRadius: 10,
+    borderColor: colors.black,
+    borderWidth: 0.2,
+  },
+  txtInput: {
+    color: colors.black,
+    flex: 1,
+    paddingHorizontal: 10,
+  },
   input: {
     padding: 10,
     borderWidth: 1,
     borderColor: "#ccc",
     marginBottom: 10,
+  },
+  btn: {
+    padding: 6,
+    marginHorizontal: 5,
   },
 });
 
