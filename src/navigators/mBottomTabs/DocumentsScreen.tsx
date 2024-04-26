@@ -8,7 +8,7 @@ export default function DocumentsScreen() {
   return (
     <View style={styles.container}>
       <Text>DocumentScreen</Text>
-      <DateTimePickerComponent />
+      {/* <DateTimePickerComponent /> */}
       {/* <View style={styles.bottomRight}>
         <Image
           placeholderStyle={styles.bottomRight}

@@ -8,7 +8,7 @@ export const COLORS = {
   black: "#0B0B0B",
   secondaryBlack: "#444654",
   tertiaryBlack: "#202123",
-  gray: "F8F8F8",
+  gray: "#F8F8F8",
   secondaryGray: "#808080",
   logoGemini: "#6180e5",
   logoGPT: "#00ae82",

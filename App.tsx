@@ -9,9 +9,10 @@ import React from "react";
 import { ActivityIndicator } from "react-native";
 import { Provider } from "react-redux";
 
-import Router from "./src/navigators/Router";
+import RouterNativeStack from "./src/navigators/RouterNativeStack";
 import { store } from "./src/redux/store";
 import { SplashScreen } from "./src/screens";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   const [isShowSplashScr, setIsShowSplashScr] = React.useState(true);
@@ -34,9 +35,11 @@ export default function App() {
     return <ActivityIndicator />;
   } else {
     return (
-      <Provider store={store}>
-        {isShowSplashScr === true ? <SplashScreen /> : <Router />}
-      </Provider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Provider store={store}>
+          {isShowSplashScr === true ? <SplashScreen /> : <RouterNativeStack />}
+        </Provider>
+      </GestureHandlerRootView>
     );
     // <>
     //   <StatusBar hidden />

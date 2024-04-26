@@ -79,14 +79,13 @@ const ChatGptScreen = ({ navigation }) => {
               left: {
                 backgroundColor: COLORS.black,
                 marginLeft: 5,
-                marginVertical: 10,
+                // marginVertical: 10,
               },
             }}
             textStyle={{
               left: {
                 color: COLORS.white,
                 fontSize: 18,
-                padding: 5,
               },
             }}
           />
@@ -229,11 +228,11 @@ const styles = StyleSheet.create({
   },
 
   avtChatGPT: {
-    alignSelf: "center",
-    height: 35,
-    width: 35,
+    alignSelf: "flex-end",
+    height: 30,
+    width: 30,
     borderRadius: 20,
-    marginLeft: 8,
+    marginLeft: 4,
   },
 });
 
