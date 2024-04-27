@@ -13,21 +13,21 @@ export default function SplashScreen() {
   return (
     <View style={styles.container}>
       <StatusBar />
-      <Image
+      <ImageBackground
         source={require("../assets/images/SplashScreenBkg.gif")}
-        resizeMode="contain"
+        resizeMode="cover"
         style={styles.image}
-      />
-
-      <ActivityIndicator />
+      >
+        <ActivityIndicator />
+      </ImageBackground>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   image: {
     flex: 1,

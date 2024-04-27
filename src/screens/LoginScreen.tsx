@@ -9,6 +9,7 @@ import React, { useState, useEffect } from "react";
 import {
   Alert,
   Button,
+  Image,
   ImageBackground,
   // StatusBar,
   StyleSheet,
@@ -122,12 +123,15 @@ export default function LoginScreen({ navigation }) {
         {/* <Text>{JSON.stringify(user?.displayName)}</Text> */}
         {user ? (
           <>
-            <Text style={{ marginTop: 60 }}>Xin chào, {user?.displayName}</Text>
-            {/* <Image
+            <Text style={{ marginTop: 100, textAlign: "center" }}>
+              {"Xin chào,\n"}
+              {user?.displayName}
+            </Text>
+            <Image
               source={{ uri: user?.photoURL }}
-              style={{ width: 100, height: 100 }}
-            /> */}
-            <View style={{ marginTop: 60 }}>
+              style={{ width: 100, height: 100, borderRadius: 100, marginTop: 20 }}
+            />
+            <View style={{ marginTop: 80 }}>
               <Button title="Bắt đầu" onPress={toHome} />
               <SpaceComponent width={100} height={10} />
               <Button title="Đăng xuất" onPress={logout} />

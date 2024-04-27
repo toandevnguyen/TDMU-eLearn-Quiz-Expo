@@ -13,8 +13,8 @@ const DateTimePickerComponent = () => {
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
+  const handleConfirm = (date: any) => {
+    console.log("A date has been picked: ", date);
     hideDatePicker();
   };
 
