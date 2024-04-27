@@ -12,6 +12,7 @@ import {
   MTopHomeTabsNavigator,
   SettingScreen,
 } from ".";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -29,10 +30,10 @@ export default function MBottomTabsNavigator() {
           name="Home"
           component={MTopHomeTabsNavigator}
           options={{
-            tabBarLabel: "Home",
+            tabBarLabel: "Ôn tập",
 
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={26} />
+              <MaterialIcons name="quiz" size={24} color={color} />
             ),
           }}
         />

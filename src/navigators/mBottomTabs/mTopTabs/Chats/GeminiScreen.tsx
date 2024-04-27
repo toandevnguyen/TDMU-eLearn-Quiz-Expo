@@ -16,15 +16,20 @@ import {
 import ChatBubbleCpn from "./ChatBubbleCpn";
 import { colors } from "../../../../constants/colors";
 import { COLORS } from "../../../../constants/theme";
-
+// import { GEMINI_API_KEY } from "../../../../../";
+// require('dotenv').config()
 export default function GeminiChatBotScreen() {
+  // require("dotenv").config();
+
   const [chat, setChat] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
-  const API_KEY = "AIzaSyBBpTcWRiGFg4h4kaQkruYVcTxGcvOtH68";
+  const API_KEY = process.env.EXPO_PUBLIC_GEMINI_API_KEY;
+  // const API_KEY_GEMINI = "AIzaSyBBpTcWRiGFg4h4kaQkruYVcTxGcvOtH68";
+
   const handleUserInput = async () => {
     //add user input to chatbot
     const updatedChat = [

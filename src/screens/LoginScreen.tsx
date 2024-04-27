@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { StatusBar } from "expo-status-bar";
 import auth from "@react-native-firebase/auth";
 import {
   GoogleSignin,
   GoogleSigninButton,
 } from "@react-native-google-signin/google-signin";
+import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import {
   Alert,
@@ -60,18 +60,6 @@ export default function LoginScreen({ navigation }) {
 
       // Sign-in the user with the credential
       const user_signIn = await auth().signInWithCredential(googleCredential);
-      // user_signIn
-      //   .then((user) => {
-      //     console.log(user);
-      //     // setUser(user);
-      //     // setError("user sign-in failed");
-      //     // return auth().signInWithCredential(googleCredential);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //     setError(error);
-      //   });
-
       const userEmail = user_signIn.user.email;
       if (
         userEmail.endsWith("@student.tdmu.edu.vn") ||
@@ -129,7 +117,12 @@ export default function LoginScreen({ navigation }) {
             </Text>
             <Image
               source={{ uri: user?.photoURL }}
-              style={{ width: 100, height: 100, borderRadius: 100, marginTop: 20 }}
+              style={{
+                width: 100,
+                height: 100,
+                borderRadius: 100,
+                marginTop: 20,
+              }}
             />
             <View style={{ marginTop: 80 }}>
               <Button title="Bắt đầu" onPress={toHome} />

@@ -15,9 +15,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { COLORS, SIZES, colors } from "../../../../constants/indexConstants";
 import { useTheme } from "../../../../themes/themeProvider";
-
+// import { CHAT_GPT_API_KEY } from "../../../../utils/env";
 const ChatGptScreen = ({ navigation }) => {
-  const API_KEY = "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";
+  const API_KEY = process.env.EXPO_PUBLIC_CHAT_GPT_API_KEY ;
+  // const API_KEY_CHATGPT = "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";
+
   const [inputMessage, setInputMessage] = useState("");
   const [outputMessage, setOutputMessage] = useState(
     "Results should be shown here."
