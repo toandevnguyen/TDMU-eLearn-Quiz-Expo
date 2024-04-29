@@ -9,6 +9,7 @@ import {
   selectIsLoggedIn,
   selectUser,
 } from "../../redux/slices/authSlice";
+import { SpaceComponent } from "../../components";
 
 export default function SettingScreen({ navigation }) {
   const { email, displayName, photoURL } = useSelector(selectUser);
@@ -18,9 +19,9 @@ export default function SettingScreen({ navigation }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   console.log("🚀 ~ SettingScreen ~ isLoggedIn:", isLoggedIn);
 
-  const gotoLoginScreen = () => {
-    navigation.navigate("LoginScreen");
-  };
+  // const gotoLoginScreen = () => {
+  //   navigation.navigate("LoginScreen");
+  // };
 
   const handleLogout = async () => {
     try {
@@ -35,16 +36,24 @@ export default function SettingScreen({ navigation }) {
   };
   return (
     <View style={styles.container}>
-      <Text>Email: {email}</Text>
-      <Text>Name: {displayName}</Text>
-      {/* <Image source={{ uri: photoURL }} /> */}
+      <Text style={{ marginTop: 100, textAlign: "center" }}>
+        {"Xin chào,\n"}
+        {displayName}
+      </Text>
       <Image
-        style={styles.tinyLogo}
-        source={{
-          uri: photoURL,
+        source={{ uri: photoURL }}
+        style={{
+          width: 100,
+          height: 100,
+          borderRadius: 100,
+          marginTop: 20,
         }}
       />
-      <Button title="Đăng xuất" onPress={handleLogout} />
+      <Text style={{ marginTop: 20, textAlign: "center" }}>Email: {email}</Text>
+      <View style={{ marginTop: 80 }}>
+        <SpaceComponent width={100} height={10} />
+        <Button title="Đăng xuất" onPress={handleLogout} />
+      </View>
     </View>
   );
 }

@@ -11,6 +11,7 @@ import {
 import { Button, Icon } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   StyleSheet,
   Text,
@@ -40,7 +41,7 @@ export default function PlaygroundScreen({ navigation: { goBack }, route }) {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const { category } = route.params;
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     let interval;
     if (isTimerActive && !isPaused) {
@@ -91,6 +92,7 @@ export default function PlaygroundScreen({ navigation: { goBack }, route }) {
     setIsTimerActive(false);
     setIsPaused(false);
     setTimeElapsed(0);
+    setIsLoading(false);
   };
 
   const handleOptionSelect = (questionIndex, option) => {
@@ -148,257 +150,266 @@ export default function PlaygroundScreen({ navigation: { goBack }, route }) {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Appbar.Header
-          style={{ width: "100%", backgroundColor: colors.darkBlue }}
-        >
-          <Appbar.BackAction color="white" onPress={() => goBack()} />
-          <Appbar.Content color="white" title="Triết học" />
-          <Appbar.Content
-            // style={styles.appBarContent}
-            title={
-              <Text style={styles.resultText}>
-                {onPressHandleSubmit
-                  ? ` Đã làm:\n${completedQuestions}/${searchResults.length} câu`
-                  : `  Điểm:\n ${score}/${searchResults.length} đ`}
-              </Text>
-            }
-          />
-        </Appbar.Header>
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#0000ff" /> // show ActivityIndicator when data is loading
+        ) : (
+          <>
+            <>
+              <Appbar.Header
+                style={{ width: "100%", backgroundColor: colors.darkBlue }}
+              >
+                <Appbar.BackAction color="white" onPress={() => goBack()} />
+                <Appbar.Content color="white" title="Triết học" />
+                <Appbar.Content
+                  // style={styles.appBarContent}
+                  title={
+                    <Text style={styles.resultText}>
+                      {onPressHandleSubmit
+                        ? ` Đã làm:\n${completedQuestions}/${searchResults.length} câu`
+                        : `  Điểm:\n ${score}/${searchResults.length} đ`}
+                    </Text>
+                  }
+                />
+              </Appbar.Header>
+              <FlatList
+                data={searchResults}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item, index }) => (
+                  <View style={styles.questionContainer}>
+                    <Text style={styles.question}>
+                      {item.index + 1}. {item.question}
+                    </Text>
+                    <TouchableOpacity
+                      style={[
+                        styles.option,
+                        selectedOptions[index] === 1 && styles.selectedOptions,
+                        showResults &&
+                          item.correctOption === 1 &&
+                          styles.correctOption,
+                        showResults &&
+                          selectedOptions[index] === 1 &&
+                          selectedOptions[index] !== item.correctOption &&
+                          styles.wrongOption,
+                      ]}
+                      onPress={() => handleOptionSelect(index, 1)}
+                      disabled={showResults}
+                    >
+                      <Text>A. {item.option1}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[
+                        styles.option,
+                        selectedOptions[index] === 2 && styles.selectedOptions,
+                        showResults &&
+                          item.correctOption === 2 &&
+                          styles.correctOption,
+                        showResults &&
+                          selectedOptions[index] === 2 &&
+                          selectedOptions[index] !== item.correctOption &&
+                          styles.wrongOption,
+                      ]}
+                      onPress={() => handleOptionSelect(index, 2)}
+                      disabled={showResults}
+                    >
+                      <Text>B. {item.option2}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[
+                        styles.option,
+                        selectedOptions[index] === 3 && styles.selectedOptions,
+                        showResults &&
+                          item.correctOption === 3 &&
+                          styles.correctOption,
+                        showResults &&
+                          selectedOptions[index] === 3 &&
+                          selectedOptions[index] !== item.correctOption &&
+                          styles.wrongOption,
+                      ]}
+                      onPress={() => handleOptionSelect(index, 3)}
+                      disabled={showResults}
+                    >
+                      <Text>C. {item.option3}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[
+                        styles.option,
+                        selectedOptions[index] === 4 && styles.selectedOptions,
+                        showResults &&
+                          item.correctOption === 4 &&
+                          styles.correctOption,
+                        showResults &&
+                          selectedOptions[index] === 4 &&
+                          selectedOptions[index] !== item.correctOption &&
+                          styles.wrongOption,
+                      ]}
+                      onPress={() => handleOptionSelect(index, 4)}
+                      disabled={showResults}
+                    >
+                      <Text>D. {item.option4}</Text>
+                    </TouchableOpacity>
+                    {showCorrectAnswer[index] && (
+                      <View>
+                        <Text style={[styles.option, styles.seeResults]}>
+                          {item.correctOption === 1 && "A. " + item.option1}
+                          {item.correctOption === 2 && "B. " + item.option2}
+                          {item.correctOption === 3 && "C. " + item.option3}
+                          {item.correctOption === 4 && "D. " + item.option4}
+                        </Text>
+                      </View>
+                    )}
 
-        <FlatList
-          data={searchResults}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <View style={styles.questionContainer}>
-              <Text style={styles.question}>
-                {item.index + 1}. {item.question}
-              </Text>
-              <TouchableOpacity
-                style={[
-                  styles.option,
-                  selectedOptions[index] === 1 && styles.selectedOptions,
-                  showResults &&
-                    item.correctOption === 1 &&
-                    styles.correctOption,
-                  showResults &&
-                    selectedOptions[index] === 1 &&
-                    selectedOptions[index] !== item.correctOption &&
-                    styles.wrongOption,
-                ]}
-                onPress={() => handleOptionSelect(index, 1)}
-                disabled={showResults}
-              >
-                <Text>A. {item.option1}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.option,
-                  selectedOptions[index] === 2 && styles.selectedOptions,
-                  showResults &&
-                    item.correctOption === 2 &&
-                    styles.correctOption,
-                  showResults &&
-                    selectedOptions[index] === 2 &&
-                    selectedOptions[index] !== item.correctOption &&
-                    styles.wrongOption,
-                ]}
-                onPress={() => handleOptionSelect(index, 2)}
-                disabled={showResults}
-              >
-                <Text>B. {item.option2}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.option,
-                  selectedOptions[index] === 3 && styles.selectedOptions,
-                  showResults &&
-                    item.correctOption === 3 &&
-                    styles.correctOption,
-                  showResults &&
-                    selectedOptions[index] === 3 &&
-                    selectedOptions[index] !== item.correctOption &&
-                    styles.wrongOption,
-                ]}
-                onPress={() => handleOptionSelect(index, 3)}
-                disabled={showResults}
-              >
-                <Text>C. {item.option3}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.option,
-                  selectedOptions[index] === 4 && styles.selectedOptions,
-                  showResults &&
-                    item.correctOption === 4 &&
-                    styles.correctOption,
-                  showResults &&
-                    selectedOptions[index] === 4 &&
-                    selectedOptions[index] !== item.correctOption &&
-                    styles.wrongOption,
-                ]}
-                onPress={() => handleOptionSelect(index, 4)}
-                disabled={showResults}
-              >
-                <Text>D. {item.option4}</Text>
-              </TouchableOpacity>
-              {showCorrectAnswer[index] && (
-                <View>
-                  <Text style={[styles.option, styles.seeResults]}>
-                    {item.correctOption === 1 && "A. " + item.option1}
-                    {item.correctOption === 2 && "B. " + item.option2}
-                    {item.correctOption === 3 && "C. " + item.option3}
-                    {item.correctOption === 4 && "D. " + item.option4}
-                  </Text>
-                </View>
-              )}
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignSelf: "center",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Button
+                        onPress={() => handleShowCorrectAnswer(index)}
+                        radius="sm"
+                        type="clear"
+                        iconRight
+                        buttonStyle={{
+                          width: 110,
+                          height: 40,
+                          // padding: 10,
+                          alignSelf: "flex-start",
+                        }}
+                      >
+                        {showCorrectAnswer[index] ? "Ẩn đáp án" : "Xem đáp án"}
+                        <MaterialCommunityIcons
+                          name={showCorrectAnswer[index] ? "eye-off" : "eye"}
+                          color="rgb(6, 175, 248)"
+                          size={24}
+                        />
+                      </Button>
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignSelf: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <Button
-                  onPress={() => handleShowCorrectAnswer(index)}
-                  radius="sm"
-                  type="clear"
-                  iconRight
-                  buttonStyle={{
-                    width: 110,
-                    height: 40,
-                    // padding: 10,
-                    alignSelf: "flex-start",
+                      <Button
+                        radius="sm"
+                        type="clear"
+                        // iconRight
+                        buttonStyle={{
+                          width: 110,
+                          height: 40,
+                        }}
+                      >
+                        Thảo luận
+                        <MaterialCommunityIcons
+                          name="comment-eye-outline"
+                          color="red"
+                          size={24}
+                        />
+                      </Button>
+                    </View>
+                  </View>
+                )}
+              />
+            </>
+            <View style={styles.containerInput}>
+              <View style={styles.txtInputContainer}>
+                <TextInput
+                  style={styles.txtInput}
+                  value={searchTxtInput}
+                  onChangeText={(searchTxtInput) => {
+                    setSearchTxtInput(searchTxtInput);
+                    searchQuestions(searchTxtInput);
                   }}
+                  placeholder="Nhập câu hỏi bạn muốn tìm..."
+                  placeholderTextColor="#aaa"
+                />
+
+                <TouchableOpacity
+                  onPress={handleClearSearch}
+                  style={styles.btn}
                 >
-                  {showCorrectAnswer[index] ? "Ẩn đáp án" : "Xem đáp án"}
-                  <MaterialCommunityIcons
-                    name={showCorrectAnswer[index] ? "eye-off" : "eye"}
-                    color="rgb(6, 175, 248)"
+                  <FontAwesome5
+                    name="eraser"
+                    color={COLORS.secondaryGray}
                     size={24}
                   />
-                </Button>
-
-                <Button
-                  radius="sm"
-                  type="clear"
-                  // iconRight
-                  buttonStyle={{
-                    width: 110,
-                    height: 40,
-                  }}
-                >
-                  Thảo luận
-                  <MaterialCommunityIcons
-                    name="comment-eye-outline"
-                    color="red"
-                    size={24}
-                  />
-                </Button>
+                </TouchableOpacity>
               </View>
             </View>
-          )}
-        />
-        <View style={styles.containerInput}>
-          <View style={styles.txtInputContainer}>
-            <TextInput
-              style={styles.txtInput}
-              value={searchTxtInput}
-              onChangeText={(searchTxtInput) => {
-                setSearchTxtInput(searchTxtInput);
-                searchQuestions(searchTxtInput);
-              }}
-              placeholder="Nhập câu hỏi bạn muốn tìm..."
-              placeholderTextColor="#aaa"
-            />
+            <View style={styles.btnBottom}>
+              <TouchableOpacity
+                style={styles.startBtn}
+                onPress={() => {
+                  if (isTimerActive) {
+                    setIsPaused((prevState) => !prevState);
+                  } else {
+                    setIsTimerActive(true);
+                    setIsPaused(false);
+                    setTimeElapsed(0);
+                  }
+                }}
+              >
+                {isTimerActive ? (
+                  isPaused ? (
+                    <Ionicons
+                      name="play"
+                      size={24}
+                      color="white"
+                      style={{ marginTop: 2 }}
+                    />
+                  ) : (
+                    <Ionicons
+                      name="pause"
+                      size={24}
+                      color="white"
+                      style={{ marginTop: 2 }}
+                    />
+                  )
+                ) : (
+                  <Ionicons
+                    name="time"
+                    size={24}
+                    color="white"
+                    style={{ marginTop: 2 }}
+                  />
+                )}
 
-            <TouchableOpacity onPress={handleClearSearch} style={styles.btn}>
-              <FontAwesome5
-                name="eraser"
-                color={COLORS.secondaryGray}
-                size={24}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+                <SpaceComponent width={5} />
+                <Text style={styles.submitButtonText}>
+                  {isTimerActive
+                    ? isPaused
+                      ? `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+                      : `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+                    : "Bắt đầu"}
+                </Text>
+              </TouchableOpacity>
 
-        <View style={styles.btnBottom}>
-          <TouchableOpacity
-            style={styles.startBtn}
-            onPress={() => {
-              if (isTimerActive) {
-                setIsPaused((prevState) => !prevState);
-              } else {
-                setIsTimerActive(true);
-                setIsPaused(false);
-                setTimeElapsed(0);
-              }
-            }}
-          >
-            {isTimerActive ? (
-              isPaused ? (
-                <Ionicons
-                  name="play"
-                  size={24}
-                  color="white"
-                  style={{ marginTop: 2 }}
-                />
-              ) : (
-                <Ionicons
-                  name="pause"
-                  size={24}
-                  color="white"
-                  style={{ marginTop: 2 }}
-                />
-              )
-            ) : (
-              <Ionicons
-                name="time"
-                size={24}
-                color="white"
-                style={{ marginTop: 2 }}
-              />
-            )}
+              <SpaceComponent width={10} />
 
-            <SpaceComponent width={5} />
-            <Text style={styles.submitButtonText}>
-              {isTimerActive
-                ? isPaused
-                  ? `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
-                  : `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
-                : "Bắt đầu"}
-            </Text>
-          </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.stopAgainBtn}
+                onPress={onPressHandleSubmit ? handleSubmit : getQuestions}
+              >
+                {onPressHandleSubmit ? (
+                  <Ionicons
+                    name="stop-circle"
+                    size={24}
+                    color="white"
+                    style={{ marginTop: 2 }}
+                  />
+                ) : (
+                  <Entypo
+                    name="back-in-time"
+                    size={24}
+                    color="white"
+                    style={{ marginTop: 2 }}
+                  />
+                )}
 
-          <SpaceComponent width={10} />
-
-          <TouchableOpacity
-            style={styles.stopAgainBtn}
-            onPress={onPressHandleSubmit ? handleSubmit : getQuestions}
-          >
-            {onPressHandleSubmit ? (
-              <Ionicons
-                name="stop-circle"
-                size={24}
-                color="white"
-                style={{ marginTop: 2 }}
-              />
-            ) : (
-              <Entypo
-                name="back-in-time"
-                size={24}
-                color="white"
-                style={{ marginTop: 2 }}
-              />
-            )}
-
-            <SpaceComponent width={5} />
-            <Text style={styles.submitButtonText}>
-              {onPressHandleSubmit ? "Kết thúc" : "Làm lại"}
-            </Text>
-          </TouchableOpacity>
-        </View>
+                <SpaceComponent width={5} />
+                <Text style={styles.submitButtonText}>
+                  {onPressHandleSubmit ? "Kết thúc" : "Làm lại"}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
       </View>
     </GestureHandlerRootView>
   );

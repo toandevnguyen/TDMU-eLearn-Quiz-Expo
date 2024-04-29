@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
@@ -8,6 +9,7 @@ import {
   TouchableOpacity,
   Alert,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import {
   Agenda,
@@ -20,6 +22,10 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import { colors } from "../../constants/colors";
 import { COLORS } from "../../constants/theme";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/slices/authSlice";
+import { fireStore } from "../../firebase/firebaseConfig";
+import firebase from "firebase/compat";
 
 // import testIDs from "../testIDs";
 
@@ -77,11 +83,94 @@ export default function CalendarScreen() {
   const [txtInputEventName, setTxtInputNewEventName] = useState<string>();
   const [selectedDay, setSelectedDay] = useState<string>(todayString);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const { email } = useSelector(selectUser);
+  const [selectedTime, setSelectedTime] = useState<Date>();
+
+  const userSchedulesRef = fireStore
+    .collection("Users")
+    .doc(email)
+    .collection("schedules");
+
+  // useEffect(() => {
+  //   // console.log("Items have changed:", selectedDay, items);
+  // }, [selectedDay, items]); // Re-render khi items thay đổi
+
+  useEffect(() => {
+    const unsubscribe = fireStore
+      .collection("Users")
+      .doc(email)
+      .collection("schedules")
+      .orderBy("startTime") // Sắp xếp theo thời gian bắt đầu
+      .onSnapshot((querySnapshot) => {
+        const eventsData: AgendaSchedule = {};
+
+        querySnapshot.forEach((doc) => {
+          const eventData = doc.data();
+          const eventDate = eventData.startTime
+            .toDate()
+            .toLocaleDateString("en-CA");
+          const eventTime = eventData.startTime.toDate().toLocaleTimeString();
+          if (!eventsData[eventDate]) {
+            eventsData[eventDate] = [];
+          }
+
+          eventsData[eventDate].push({
+            name: eventData.title,
+            height: 50,
+            day: eventDate,
+            time: eventTime,
+            // Thêm thông tin khác của sự kiện nếu cần
+          });
+        });
+        setIsLoading(false);
+        setItems(eventsData);
+      });
+
+    return unsubscribe;
+  }, [email]); // Chỉ cần re-render khi email thay đổi
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
 
+  const addEvent = async () => {
+    if (txtInputEventName) {
+      try {
+        const eventData = {
+          title: txtInputEventName,
+          description: "Mô tả sự kiện",
+          startTime: firebase.firestore.Timestamp.fromDate(
+            new Date(selectedTime)
+          ),
+          endTime: firebase.firestore.Timestamp.fromDate(new Date(selectedDay)),
+          createdAt: firebase.firestore.Timestamp.now(),
+          updatedAt: firebase.firestore.Timestamp.now(),
+          notification: {
+            title: "Nhắc nhở sự kiện",
+            body: "Bạn có một sự kiện sắp diễn ra",
+          },
+        };
+
+        const docRef = await userSchedulesRef.add(eventData);
+        console.log("Event added with ID: ", docRef.id);
+        // Cập nhật lại state items để hiển thị sự kiện mới trên lịch
+        const newItems = { ...items };
+        if (!newItems[selectedDay]) {
+          newItems[selectedDay] = [];
+        }
+        newItems[selectedDay].push({
+          name: txtInputEventName,
+          height: 50,
+          day: selectedDay,
+        });
+        setItems(newItems);
+        setTxtInputNewEventName(""); // Clear input after adding
+      } catch (error) {
+        console.error("Error adding event: ", error);
+      }
+    }
+  };
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
@@ -93,6 +182,7 @@ export default function CalendarScreen() {
     // hideDatePicker();
     const selectedDateString = date.toLocaleDateString("en-CA");
     setSelectedDay(selectedDateString);
+    setSelectedTime(date);
     if (!items[selectedDateString]) {
       items[selectedDateString] = [];
     }
@@ -101,10 +191,6 @@ export default function CalendarScreen() {
     // setTxtInputNewEventName("");
     hideDatePicker();
   };
-
-  useEffect(() => {
-    // console.log("Items have changed:", selectedDay, items);
-  }, [selectedDay, items]); // Re-render khi items thay đổi
 
   const handleDayPress = (day: DateData) => {
     setSelectedDay(day.dateString);
@@ -117,30 +203,16 @@ export default function CalendarScreen() {
     hideDatePicker();
   };
 
-  const addEvent = () => {
-    if (txtInputEventName) {
-      const newItems = { ...items };
-
-      if (!newItems[selectedDay]) {
-        newItems[selectedDay] = [];
-      }
-      newItems[selectedDay].push({
-        name: txtInputEventName,
-        height: 50,
-        day: selectedDay,
-      });
-
-      setItems(newItems);
-      setTxtInputNewEventName(""); // Clear input after adding
-    }
-  };
-
   const renderItem = (reservation: AgendaEntry, isFirst: boolean) => {
     return (
       <TouchableOpacity
-        // testID={testIDs.agenda.ITEM}
-        style={[styles.item, { height: reservation.height }]}
-        onPress={() => Alert.alert(reservation.name, reservation.day)}
+        style={[styles.item]}
+        onPress={() =>
+          Alert.alert(
+            reservation.name,
+            reservation.day + " " + reservation.time
+          )
+        }
       >
         <Text
           style={{
@@ -150,14 +222,24 @@ export default function CalendarScreen() {
         >
           {reservation.name}
         </Text>
-        <Text
-          style={{
-            fontSize: isFirst ? 16 : 14,
-            color: isFirst ? "black" : "#43515c",
-          }}
-        >
-          {reservation.day}
-        </Text>
+        <View style={{ flexDirection: "column" }}>
+          <Text
+            style={{
+              fontSize: isFirst ? 16 : 14,
+              color: isFirst ? "black" : "#43515c",
+            }}
+          >
+            Ngày: {new Date(reservation.day).toLocaleDateString("vi-VN")}
+          </Text>
+          <Text
+            style={{
+              fontSize: isFirst ? 16 : 14,
+              color: isFirst ? "black" : "#43515c",
+            }}
+          >
+            Thời gian: {reservation.time}
+          </Text>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -175,61 +257,67 @@ export default function CalendarScreen() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <Agenda
-        // If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday
-        firstDay={1}
-        // Hide month navigation arrows. Default = false
-        hideArrows={false}
-        items={items}
-        // loadItemsForMonth={loadItems}
-        selected={selectedDay}
-        onDayPress={handleDayPress}
-        renderItem={renderItem}
-        renderEmptyDate={renderEmptyDate}
-        rowHasChanged={rowHasChanged}
-        showClosingKnob
-        pastScrollRange={6}
-        futureScrollRange={6}
-        // pagingEnabled={true}
-      />
-
-      <View style={styles.inputContainer}>
-        <View style={styles.txtInputContainer}>
-          <TextInput
-            style={styles.txtInput}
-            value={txtInputEventName}
-            onChangeText={setTxtInputNewEventName}
-            placeholder="Nhập để thêm sự kiện mới... "
+    <View style={{ flex: 1, justifyContent: "center" }}>
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#0000ff" /> // show ActivityIndicator when data is loading
+      ) : (
+        <>
+          <Agenda
+            // If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday
+            firstDay={1}
+            // Hide month navigation arrows. Default = false
+            hideArrows={false}
+            items={items}
+            // loadItemsForMonth={loadItems}
+            selected={selectedDay}
+            onDayPress={handleDayPress}
+            renderItem={renderItem}
+            renderEmptyDate={renderEmptyDate}
+            rowHasChanged={rowHasChanged}
+            showClosingKnob
+            pastScrollRange={6}
+            futureScrollRange={6}
           />
+          <View style={styles.inputContainer}>
+            <View style={styles.txtInputContainer}>
+              <TextInput
+                style={styles.txtInput}
+                value={txtInputEventName}
+                onChangeText={setTxtInputNewEventName}
+                placeholder="Nhập để thêm sự kiện mới... "
+              />
 
-          <TouchableOpacity onPress={showDatePicker} style={styles.btn}>
-            <FontAwesome
-              name="calendar-plus-o"
-              size={24}
-              color="rgb(243, 182, 16)"
-            />
-          </TouchableOpacity>
-          <DateTimePickerModal
-            isVisible={isDatePickerVisible}
-            mode="datetime"
-            onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
-          />
-          <Button
-            buttonStyle={[styles.btn]}
-            onPress={addEvent}
-            disabled={!txtInputEventName}
-            type="clear"
-          >
-            <FontAwesome
-              name="send"
-              color={txtInputEventName ? COLORS.primary : COLORS.secondaryGray}
-              size={24}
-            />
-          </Button>
-        </View>
-      </View>
+              <TouchableOpacity onPress={showDatePicker} style={styles.btn}>
+                <FontAwesome
+                  name="calendar-plus-o"
+                  size={24}
+                  color={colors.blue}
+                />
+              </TouchableOpacity>
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="datetime"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+              />
+              <Button
+                buttonStyle={[styles.btn]}
+                onPress={addEvent}
+                disabled={!txtInputEventName}
+                type="clear"
+              >
+                <FontAwesome
+                  name="send"
+                  color={
+                    txtInputEventName ? COLORS.primary : COLORS.secondaryGray
+                  }
+                  size={24}
+                />
+              </Button>
+            </View>
+          </View>
+        </>
+      )}
     </View>
   );
 }
@@ -251,7 +339,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     // backgroundColor: colors.white,
-    paddingVertical: 13,
+    paddingVertical: 8,
   },
   txtInputContainer: {
     flex: 1,

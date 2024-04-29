@@ -8,15 +8,7 @@ import {
 } from "@react-native-google-signin/google-signin";
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import {
-  Alert,
-  Button,
-  Image,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Alert, ImageBackground, StyleSheet, Text } from "react-native";
 
 // import { useDispatch } from "react-redux";
 
@@ -25,7 +17,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   // ButtonComponent,
   Container,
-  SpaceComponent,
 } from "../components";
 import { fireStore } from "../firebase/firebaseConfig";
 import {
@@ -98,8 +89,10 @@ export default function LoginScreen({ navigation }) {
         userEmail.endsWith("@tdmu.edu.vn")
       ) {
         // Save user data to Firestore
-        const db = fireStore;
-        const userRef = db.collection("Users").doc(user_signIn.user.email);
+        // const db = fireStore;
+        const userRef = fireStore
+          .collection("Users")
+          .doc(user_signIn.user.email);
         await userRef.set({
           displayName: user_signIn.user.displayName,
           email: user_signIn.user.email,
@@ -158,7 +151,7 @@ export default function LoginScreen({ navigation }) {
         style={styles.imgBkg}
       >
         <Text>{JSON.stringify(error)}</Text>
-        
+
         <GoogleSigninButton
           size={GoogleSigninButton.Size.Standard}
           style={styles.btn}
@@ -207,8 +200,11 @@ const styles = StyleSheet.create({
 // Sử dụng hàm này trước khi dispatch action
 // dispatch(setUser(serializeUser(user_signIn)));
 
-{/* <Text>{JSON.stringify(user?.displayName)}</Text> */}
-        {/* {isLoggedIn ? (
+{
+  /* <Text>{JSON.stringify(user?.displayName)}</Text> */
+}
+{
+  /* {isLoggedIn ? (
           <>
             <Text style={{ marginTop: 100, textAlign: "center" }}>
               {"Xin chào,\n"}
@@ -229,4 +225,5 @@ const styles = StyleSheet.create({
               <Button title="Đăng xuất" onPress={handleLogout} />
             </View>
           </>
-        ) : ( */}
+        ) : ( */
+}
