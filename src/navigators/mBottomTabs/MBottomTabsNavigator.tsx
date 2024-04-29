@@ -1,3 +1,4 @@
+import { MaterialIcons } from "@expo/vector-icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
@@ -12,18 +13,18 @@ import {
   MTopHomeTabsNavigator,
   SettingScreen,
 } from ".";
-import { MaterialIcons } from "@expo/vector-icons";
+import { colors } from "../../constants/colors";
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function MBottomTabsNavigator() {
   return (
-    <GestureHandlerRootView style={{ flex: 1, paddingTop: 30 }}>
-      <StatusBar />
-      {/* <NavigationContainer> */}
+    <>
+      {/* // <GestureHandlerRootView style={{ flex: 1, paddingTop: 30 }}> */}
+      {/* <StatusBar /> */}
       <Tab.Navigator
         initialRouteName="Home"
-        activeColor="#06aff8"
+        activeColor={colors.darkBlue}
         // barStyle={{ backgroundColor: "rgb(6, 175, 248)" }}
       >
         <Tab.Screen
@@ -91,7 +92,7 @@ export default function MBottomTabsNavigator() {
           }}
         />
       </Tab.Navigator>
-      {/* </NavigationContainer> */}
-    </GestureHandlerRootView>
+      {/* </GestureHandlerRootView> */}
+    </>
   );
 }

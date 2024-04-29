@@ -6,13 +6,15 @@ import {
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
 import React from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, SafeAreaView } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider } from "react-redux";
 
 import RouterNativeStack from "./src/navigators/RouterNativeStack";
 import { store } from "./src/redux/store";
 import { SplashScreen } from "./src/screens";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { StatusBar } from "expo-status-bar";
+import { colors } from "./src/constants/colors";
 
 export default function App() {
   const [isShowSplashScr, setIsShowSplashScr] = React.useState(true);
@@ -35,11 +37,14 @@ export default function App() {
     return <ActivityIndicator />;
   } else {
     return (
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Provider store={store}>
-          {isShowSplashScr === true ? <SplashScreen /> : <RouterNativeStack />}
-        </Provider>
-      </GestureHandlerRootView>
+      <Provider store={store}>
+        {/* <GestureHandlerRootView style={{ flex: 1, paddingTop: 30 }}> */}
+        {/* <SafeAreaView style={{ flex: 1, backgroundColor: "red" }}> */}
+        <StatusBar style="inverted" backgroundColor={colors.darkBlue} />
+        {isShowSplashScr === true ? <SplashScreen /> : <RouterNativeStack />}
+        {/* </SafeAreaView> */}
+        {/* </GestureHandlerRootView> */}
+      </Provider>
     );
     // <>
     //   <StatusBar hidden />

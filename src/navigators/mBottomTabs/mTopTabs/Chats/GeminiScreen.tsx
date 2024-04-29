@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 10,
     borderColor: colors.black,
-    borderWidth: 0.2,
+    borderWidth: 1,
   },
   txtInput: {
     color: colors.black,

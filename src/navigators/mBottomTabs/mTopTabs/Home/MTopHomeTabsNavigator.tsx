@@ -13,7 +13,7 @@ export default function MTopHomeTabsNavigator() {
       screenOptions={() => ({
         tabBarLabelStyle: {
           fontSize: 14,
-          // color: colors.darkBlue,
+          color: colors.darkBlue,
 
           fontWeight: "bold",
         },
@@ -22,7 +22,7 @@ export default function MTopHomeTabsNavigator() {
           height: 70,
           // padding: 10,
           justifyContent: "center",
-          backgroundColor: colors.white,
+          // backgroundColor: colors.darkBlue,
           // paddingTop: 10,
         },
       })}
@@ -32,6 +32,7 @@ export default function MTopHomeTabsNavigator() {
           title: "Các môn đại cương",
           // tabBarPressColor: colors.darkBlue,
           tabBarActiveTintColor: colors.darkBlue,
+          tabBarInactiveTintColor: colors.gray,
         }}
         name="GeneralSubjectsNavigator"
         component={GeneralSubjectsScreen}
@@ -40,6 +41,8 @@ export default function MTopHomeTabsNavigator() {
         options={{
           title: "Các môn công nghệ",
           // tabBarPressColor: colors.darkBlue,
+
+          tabBarInactiveTintColor: colors.gray,
           tabBarActiveTintColor: colors.darkBlue,
         }}
         name="ItSubjectsNavigator"

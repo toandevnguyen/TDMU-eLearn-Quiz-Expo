@@ -164,8 +164,8 @@ const ChatGptScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#f8f8f8", padding: 5 }}>
-      <StatusBar style="auto" />
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#f8f8f8", paddingTop: 0 }}>
+      {/* <StatusBar style="auto" /> */}
       <View style={{ flex: 1, justifyContent: "center" }}>
         <GiftedChat
           messages={messages}
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   containerInput: {
     flexDirection: "row",
     // backgroundColor: colors.white,
-    paddingVertical: 8,
+    paddingVertical: 13,
   },
   txtInputContainer: {
     flex: 1,
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 10,
     borderColor: colors.black,
-    borderWidth: 0.2,
+    borderWidth: 1,
   },
   txtInput: {
     color: colors.black,

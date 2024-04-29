@@ -1,3 +1,5 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable import/order */
 /* eslint-disable prettier/prettier */
 import auth from "@react-native-firebase/auth";
 import {
@@ -11,23 +13,38 @@ import {
   Button,
   Image,
   ImageBackground,
-  // StatusBar,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+
+// import { useDispatch } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   // ButtonComponent,
   Container,
   SpaceComponent,
 } from "../components";
+import { fireStore } from "../firebase/firebaseConfig";
+import {
+  logout,
+  // selectIsLoggedIn,
+  // selectIsLoggedIn,
+  selectUser,
+  setUser,
+} from "../redux/slices/authSlice";
 // import { globalStyles } from "../../styles/globalStyles";
 
 export default function LoginScreen({ navigation }) {
   const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
   const [error, setError] = useState();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
+
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
@@ -36,8 +53,23 @@ export default function LoginScreen({ navigation }) {
   }, []);
 
   // Handle user state changes
-  function onAuthStateChanged(user) {
-    setUser(user);
+  function onAuthStateChanged(user: {
+    email: any;
+    displayName: any;
+    photoURL: any;
+  }) {
+    if (user) {
+      dispatch(
+        setUser({
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        })
+      );
+    } else {
+      // dispatch(setUser(null));
+      dispatch(logout());
+    }
     if (initializing) setInitializing(false);
   }
 
@@ -65,16 +97,33 @@ export default function LoginScreen({ navigation }) {
         userEmail.endsWith("@student.tdmu.edu.vn") ||
         userEmail.endsWith("@tdmu.edu.vn")
       ) {
+        // Save user data to Firestore
+        const db = fireStore;
+        const userRef = db.collection("Users").doc(user_signIn.user.email);
+        await userRef.set({
+          displayName: user_signIn.user.displayName,
+          email: user_signIn.user.email,
+          photoURL: user_signIn.user.photoURL,
+        });
         // Email is valid, proceed to the app
         console.log("Login successful!");
         console.log(userEmail);
+        // Dispatch action to set user in Redux store
+        dispatch(
+          setUser({
+            email: user_signIn.user.email,
+            displayName: user_signIn.user.displayName,
+            photoURL: user_signIn.user.photoURL,
+          })
+        );
+        // toHome();
       } else {
         // Email is not valid, show an alert and sign out
         Alert.alert(
           "Đăng nhập không thành công",
           "Bạn cần sử dụng email của TDMU để đăng nhập."
         );
-        logout();
+        handleLogout();
       }
     } catch (error) {
       console.log(error);
@@ -87,9 +136,9 @@ export default function LoginScreen({ navigation }) {
 
   if (initializing) return null;
 
-  const logout = async () => {
+  const handleLogout = async () => {
     try {
-      setUser(null);
+      dispatch(logout());
       await GoogleSignin.revokeAccess();
       await auth().signOut();
       console.log(user);
@@ -97,6 +146,7 @@ export default function LoginScreen({ navigation }) {
       console.log(error);
     }
   };
+
   const toHome = () => {
     navigation.navigate("MBottomTabsNavigator");
   };
@@ -108,36 +158,14 @@ export default function LoginScreen({ navigation }) {
         style={styles.imgBkg}
       >
         <Text>{JSON.stringify(error)}</Text>
-        {/* <Text>{JSON.stringify(user?.displayName)}</Text> */}
-        {user ? (
-          <>
-            <Text style={{ marginTop: 100, textAlign: "center" }}>
-              {"Xin chào,\n"}
-              {user?.displayName}
-            </Text>
-            <Image
-              source={{ uri: user?.photoURL }}
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: 100,
-                marginTop: 20,
-              }}
-            />
-            <View style={{ marginTop: 80 }}>
-              <Button title="Bắt đầu" onPress={toHome} />
-              <SpaceComponent width={100} height={10} />
-              <Button title="Đăng xuất" onPress={logout} />
-            </View>
-          </>
-        ) : (
-          <GoogleSigninButton
-            size={GoogleSigninButton.Size.Standard}
-            style={styles.btn}
-            color={GoogleSigninButton.Color.Dark}
-            onPress={onGoogleButtonPress}
-          />
-        )}
+        
+        <GoogleSigninButton
+          size={GoogleSigninButton.Size.Standard}
+          style={styles.btn}
+          color={GoogleSigninButton.Color.Dark}
+          onPress={onGoogleButtonPress}
+        />
+        {/* )} */}
         <StatusBar style="auto" />
       </ImageBackground>
     </Container>
@@ -167,3 +195,38 @@ const styles = StyleSheet.create({
     // color: "GoogleSigninButton.Color.Dark",
   },
 });
+
+// Hàm này chuyển đổi đối tượng Firebase User thành một đối tượng dữ liệu serializable
+// const serializeUser = (user_signIn) => ({
+//   displayName: user_signIn.user.displayName,
+//   email: user_signIn.user.email,
+//   photoURL: user_signIn.user.photoURL,
+//   // Các trường thông tin khác cần thiết
+// });
+
+// Sử dụng hàm này trước khi dispatch action
+// dispatch(setUser(serializeUser(user_signIn)));
+
+{/* <Text>{JSON.stringify(user?.displayName)}</Text> */}
+        {/* {isLoggedIn ? (
+          <>
+            <Text style={{ marginTop: 100, textAlign: "center" }}>
+              {"Xin chào,\n"}
+              {user?.displayName}
+            </Text>
+            <Image
+              source={{ uri: user?.photoURL }}
+              style={{
+                width: 100,
+                height: 100,
+                borderRadius: 100,
+                marginTop: 20,
+              }}
+            />
+            <View style={{ marginTop: 80 }}>
+              <Button title="Bắt đầu" onPress={toHome} />
+              <SpaceComponent width={100} height={10} />
+              <Button title="Đăng xuất" onPress={handleLogout} />
+            </View>
+          </>
+        ) : ( */}

@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     // backgroundColor: colors.white,
-    paddingVertical: 8,
+    paddingVertical: 13,
   },
   txtInputContainer: {
     flex: 1,
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 10,
     borderColor: colors.black,
-    borderWidth: 0.2,
+    borderWidth: 1,
   },
   txtInput: {
     color: colors.black,

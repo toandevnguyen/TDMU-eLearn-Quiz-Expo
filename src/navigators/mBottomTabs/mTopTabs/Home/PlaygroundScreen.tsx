@@ -148,7 +148,9 @@ export default function PlaygroundScreen({ navigation: { goBack }, route }) {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Appbar.Header style={{ width: "100%", backgroundColor: colors.blue }}>
+        <Appbar.Header
+          style={{ width: "100%", backgroundColor: colors.darkBlue }}
+        >
           <Appbar.BackAction color="white" onPress={() => goBack()} />
           <Appbar.Content color="white" title="Triết học" />
           <Appbar.Content
@@ -495,7 +497,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "rgb(6, 175, 248)",
   },
   startBtn: {
-    backgroundColor: "rgb(6, 175, 248)",
+    backgroundColor: colors.darkBlue,
     padding: 10,
     marginVertical: 10,
     borderRadius: 5,
@@ -507,7 +509,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   stopAgainBtn: {
-    backgroundColor: "rgb(6, 175, 248)",
+    backgroundColor: colors.darkBlue,
     padding: 10,
     marginVertical: 10,
     borderRadius: 5,

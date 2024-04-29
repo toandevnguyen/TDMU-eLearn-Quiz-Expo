@@ -2,10 +2,9 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import React from "react";
 import { StyleSheet } from "react-native";
 
-import { colors } from "../../../../constants/indexConstants";
 import ChatGptScreen from "./ChatGptScreen";
 import GeminiScreen from "./GeminiScreen";
-import { backgroundColor } from "../../../../styles/style";
+import { colors } from "../../../../constants/indexConstants";
 
 const MTopTab = createMaterialTopTabNavigator();
 export default function MTopChatTabsNavigator() {
@@ -23,7 +22,8 @@ export default function MTopChatTabsNavigator() {
           height: 70,
           // padding: 10,
           justifyContent: "center",
-          backgroundColor: colors.white,
+          // backgroundColor: "#2f95dc",
+
           // paddingTop: 10,
         },
       })}
