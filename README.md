@@ -5,7 +5,7 @@
 - Here are some screenshots of the app interface:
   <div align="center">
      <figure style="margin-bottom: 20px;">
-       <img src="https://github.com/toandevnguyen/RemoteLights220V-DS18B20/blob/main/SplashScreen.jpg" alt="Splash Screen" width="300"/>
+       <img src="https://github.com/toandevnguyen/TDMU-eLearn-Quiz-Expo/blob/ToanDev/screenshots/SplashScreen.jpg" alt="Splash Screen" width="300"/>
       
      </figure>
      <figure style="margin-bottom: 20px;">
