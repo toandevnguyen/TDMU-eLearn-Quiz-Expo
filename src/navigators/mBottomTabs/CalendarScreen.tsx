@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "@rneui/themed";
+import firebase from "firebase/compat";
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -19,13 +20,12 @@ import {
   LocaleConfig,
 } from "react-native-calendars";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useSelector } from "react-redux";
 
 import { colors } from "../../constants/colors";
 import { COLORS } from "../../constants/theme";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/slices/authSlice";
 import { fireStore } from "../../firebase/firebaseConfig";
-import firebase from "firebase/compat";
+import { selectUser } from "../../redux/slices/authSlice";
 
 // import testIDs from "../testIDs";
 
@@ -92,10 +92,7 @@ export default function CalendarScreen() {
     .doc(email)
     .collection("schedules");
 
-  // useEffect(() => {
-  //   // console.log("Items have changed:", selectedDay, items);
-  // }, [selectedDay, items]); // Re-render khi items thay đổi
-
+ 
   useEffect(() => {
     const unsubscribe = fireStore
       .collection("Users")
@@ -116,6 +113,7 @@ export default function CalendarScreen() {
           }
 
           eventsData[eventDate].push({
+            id: doc.id, // Add this line
             name: eventData.title,
             height: 50,
             day: eventDate,
@@ -203,15 +201,68 @@ export default function CalendarScreen() {
     hideDatePicker();
   };
 
+  const handleEditEvent = (item) => {
+    // Set the input field to the current event name
+    setTxtInputNewEventName(item.name);
+    // Set the selected day to the current event day
+    setSelectedDay(item.day);
+    // Show the date picker
+    showDatePicker();
+  };
+
+  const handleDeleteEvent = async (item) => {
+    // Delete the event from Firestore
+    try {
+      await userSchedulesRef.doc(item.id).delete();
+      console.log("Event deleted with ID: ", item.id);
+      // Remove the event from the items state
+      const newItems = { ...items };
+      const dayEvents = newItems[item.day];
+      const updatedDayEvents = dayEvents.filter(
+        (event) => event.id !== item.id
+      );
+      newItems[item.day] = updatedDayEvents;
+      setItems(newItems);
+    } catch (error) {
+      console.error("Error deleting event: ", error);
+    }
+  };
+
+  const handleItemPress = (item) => {
+    Alert.alert(
+      "Chọn hành động",
+      "Bạn muốn chỉnh sửa hay xóa sự kiện này?",
+      [
+        {
+          text: "Chỉnh sửa",
+          onPress: () => handleEditEvent(item),
+        },
+        {
+          text: "Xóa",
+          onPress: () => handleDeleteEvent(item),
+          style: "destructive",
+        },
+        {
+          text: "Hủy",
+          style: "cancel",
+        },
+      ],
+      { cancelable: true }
+    );
+  };
+
   const renderItem = (reservation: AgendaEntry, isFirst: boolean) => {
     return (
       <TouchableOpacity
         style={[styles.item]}
-        onPress={() =>
-          Alert.alert(
-            reservation.name,
-            reservation.day + " " + reservation.time
-          )
+        onPress={
+          () => handleItemPress(reservation)
+          // Alert.alert(
+          //   reservation.name,
+          //   `${new Date(reservation.day).toLocaleDateString("vi-VN")}` +
+          //     " " +
+          //     reservation.time
+          // )
         }
       >
         <Text

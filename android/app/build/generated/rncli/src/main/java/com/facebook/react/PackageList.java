@@ -25,10 +25,14 @@ import com.reactnativegooglesignin.RNGoogleSigninPackage;
 import expo.modules.ExpoModulesPackage;
 // react-native-add-calendar-event
 import com.vonovak.AddCalendarEventPackage;
+// react-native-blob-util
+import com.ReactNativeBlobUtil.ReactNativeBlobUtilPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 // react-native-pager-view
 import com.reactnativepagerview.PagerViewPackage;
+// react-native-pdf
+import org.wonday.pdf.RNPDFPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
 // react-native-safe-area-context
@@ -91,8 +95,10 @@ public class PackageList {
       new RNGoogleSigninPackage(),
       new ExpoModulesPackage(),
       new AddCalendarEventPackage(),
+      new ReactNativeBlobUtilPackage(),
       new RNGestureHandlerPackage(),
       new PagerViewPackage(),
+      new RNPDFPackage(),
       new ReanimatedPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),

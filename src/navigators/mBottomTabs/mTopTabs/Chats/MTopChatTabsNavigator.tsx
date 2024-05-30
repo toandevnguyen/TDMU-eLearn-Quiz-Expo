@@ -2,9 +2,9 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import React from "react";
 import { StyleSheet } from "react-native";
 
+import { colors } from "../../../../constants/indexConstants";
 import ChatGptScreen from "./ChatGptScreen";
 import GeminiScreen from "./GeminiScreen";
-import { colors } from "../../../../constants/indexConstants";
 
 const MTopTab = createMaterialTopTabNavigator();
 export default function MTopChatTabsNavigator() {

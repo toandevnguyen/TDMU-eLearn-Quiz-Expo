@@ -36,7 +36,7 @@ export default function SettingScreen({ navigation }) {
   };
   return (
     <View style={styles.container}>
-      <Text style={{ marginTop: 100, textAlign: "center" }}>
+      <Text style={{ justifyContent: "center", textAlign: "center" }}>
         {"Xin chào,\n"}
         {displayName}
       </Text>
@@ -50,9 +50,8 @@ export default function SettingScreen({ navigation }) {
         }}
       />
       <Text style={{ marginTop: 20, textAlign: "center" }}>Email: {email}</Text>
-      <View style={{ marginTop: 80 }}>
-        <SpaceComponent width={100} height={10} />
-        <Button title="Đăng xuất" onPress={handleLogout} />
+      <View style={{ position: "absolute", bottom: 10 }}>
+        <Button title="Chuyển tài khoản" onPress={handleLogout} />
       </View>
     </View>
   );

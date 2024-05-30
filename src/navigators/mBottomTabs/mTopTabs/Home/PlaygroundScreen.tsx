@@ -40,8 +40,10 @@ export default function PlaygroundScreen({ navigation: { goBack }, route }) {
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const { category } = route.params;
   const [isLoading, setIsLoading] = useState(true);
+  
+  const { category } = route.params;
+  
   useEffect(() => {
     let interval;
     if (isTimerActive && !isPaused) {

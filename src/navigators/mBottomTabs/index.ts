@@ -1,15 +1,15 @@
 import CalendarScreen from "./CalendarScreen";
-import DocumentsScreen from "./DocumentsScreen";
+import DocsScreen from "./documents/DocsScreen";
 // import MBottomTabsNavigator from "./MBottomTabsNavigator";
 import SettingScreen from "./SettingScreen";
-import ChatBubbleCpn from "./mTopTabs/Chats/ChatBubbleCpn";
-import ChatGptScreen from "./mTopTabs/Chats/ChatGptScreen";
-import GeminiScreen from "./mTopTabs/Chats/GeminiScreen";
-import MTopChatTabsNavigator from "./mTopTabs/Chats/MTopChatTabsNavigator";
-import GeneralSubjectsScreen from "./mTopTabs/Home/GeneralSubjectsScreen";
-import ItSubjectsScreen from "./mTopTabs/Home/ItSubjectsScreen";
-import MTopHomeTabsNavigator from "./mTopTabs/Home/MTopHomeTabsNavigator";
-import PlaygroundScreen from "./mTopTabs/Home/PlaygroundScreen";
+import ChatBubbleCpn from "./mTopTabs/chats/ChatBubbleCpn";
+import ChatGptScreen from "./mTopTabs/chats/ChatGptScreen";
+import GeminiScreen from "./mTopTabs/chats/GeminiScreen";
+import MTopChatTabsNavigator from "./mTopTabs/chats/MTopChatTabsNavigator";
+import GeneralSubjectsScreen from "./mTopTabs/home/GeneralSubjectsScreen";
+import ItSubjectsScreen from "./mTopTabs/home/ItSubjectsScreen";
+import MTopHomeTabsNavigator from "./mTopTabs/home/MTopHomeTabsNavigator";
+import PlaygroundScreen from "./mTopTabs/home/PlaygroundScreen";
 
 export {
   GeminiScreen,
@@ -21,7 +21,7 @@ export {
   ItSubjectsScreen,
   PlaygroundScreen,
   CalendarScreen,
-  DocumentsScreen,
+  DocsScreen as DocumentsScreen,
   // MBottomTabsNavigator,
   SettingScreen,
 };

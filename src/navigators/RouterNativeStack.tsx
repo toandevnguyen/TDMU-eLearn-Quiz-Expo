@@ -4,10 +4,14 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 
 import { GeneralSubjectsScreen, PlaygroundScreen } from "./mBottomTabs";
 import MBottomTabsNavigator from "./mBottomTabs/MBottomTabsNavigator";
+import DocsScreen from "./mBottomTabs/documents/DocsScreen";
+import IndexDocsScreen from "./mBottomTabs/documents/IndexDocsScreen";
+import LecturersScreen from "./mBottomTabs/documents/LecturersScreen";
 import {
   logout,
   selectIsLoggedIn,
@@ -15,7 +19,6 @@ import {
   setUser,
 } from "../redux/slices/authSlice";
 import { LoginScreen } from "../screens";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RouterNativeStack() {
   const NativeStack = createNativeStackNavigator();
@@ -49,12 +52,28 @@ export default function RouterNativeStack() {
           <NativeStack.Screen
             name="PlaygroundScreen"
             component={PlaygroundScreen}
-            options={({ navigation, route }) => ({
+            options={{
               headerTitle: "Triết học",
               headerShown: false,
               // Add a placeholder button without the `onPress` to avoid flicker
               // headerRight: () => <Button title="ĐÁP ÁN" />,
-            })}
+            }}
+          />
+
+          <NativeStack.Screen
+            name="IndexDocsScreen"
+            component={IndexDocsScreen}
+            options={{ headerShown: false }}
+          />
+          <NativeStack.Screen
+            name="LecturersScreen"
+            component={LecturersScreen}
+            options={{ headerShown: false }}
+          />
+          <NativeStack.Screen
+            name="DocsScreen"
+            component={DocsScreen}
+            options={{ headerShown: false }}
           />
         </NativeStack.Navigator>
       </NavigationContainer>

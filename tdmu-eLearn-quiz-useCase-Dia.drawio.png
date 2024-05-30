@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Người dùng" as User
+
+rectangle "Ứng dụng TDMU-eLearn-Quiz" {
+    User - (Đăng nhập bằng tài khoản Google)
+    (Đăng nhập bằng tài khoản Google) .> (Bấm vào nút \"Đăng nhập bằng Google\") : <<include>>
+    (Đăng nhập bằng tài khoản Google) .> (Chuyển hướng đến trang đăng nhập của Google) : <<include>>
+    (Chuyển hướng đến trang đăng nhập của Google) .> (Chọn tài khoản Google muốn đăng nhập) : <<include>>
+    (Chọn tài khoản Google muốn đăng nhập) .> (Nhận thông tin đăng nhập từ Google) : <<include>>
+    (Nhận thông tin đăng nhập từ Google) .> (Xác thực thông tin đăng nhập) : <<include>>
+    (Xác thực thông tin đăng nhập) .> (Đăng nhập thành công) : <<extend>>
+    (Xác thực thông tin đăng nhập) .> (Hiển thị thông báo lỗi) : <<extend>>
+}
+
+note right of (Đăng nhập bằng tài khoản Google)
+    Cho phép người dùng đăng nhập vào ứng dụng
+    TDMU-eLearn-Quiz bằng tài khoản Google
+end note
+
+note right of (Bấm vào nút "Đăng nhập bằng Google")
+    Người dùng bấm vào nút "Đăng nhập bằng Google"
+end note
+
+note right of (Chuyển hướng đến trang đăng nhập của Google)
+    Ứng dụng chuyển hướng đến trang đăng nhập của Google
+end note
+
+note right of (Chọn tài khoản Google muốn đăng nhập)
+    Người dùng chọn tài khoản Google muốn đăng nhập
+end note
+
+note right of (Nhận thông tin đăng nhập từ Google)
+    Ứng dụng nhận thông tin đăng nhập từ Google
+end note
+
+note right of (Xác thực thông tin đăng nhập)
+    Ứng dụng xác thực thông tin đăng nhập
+end note
+
+note right of (Đăng nhập thành công)
+    Nếu thông tin đăng nhập hợp lệ, người dùng được đăng nhập thành công vào ứng dụng
+end note
+
+note right of (Hiển thị thông báo lỗi)
+    Nếu thông tin đăng nhập không hợp lệ, hiển thị thông báo lỗi cho người dùng
+end note
+
+note bottom of User
+    Người dùng phải có tài khoản Google mà trường cấp
+end note
+
+@enduml

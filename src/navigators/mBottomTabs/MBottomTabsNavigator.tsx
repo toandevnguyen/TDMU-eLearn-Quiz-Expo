@@ -8,12 +8,12 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 import {
   CalendarScreen,
-  DocumentsScreen,
   MTopChatTabsNavigator,
   MTopHomeTabsNavigator,
   SettingScreen,
 } from ".";
 import { colors } from "../../constants/colors";
+import IndexDocsScreen from "./documents/IndexDocsScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -25,7 +25,7 @@ export default function MBottomTabsNavigator() {
       <Tab.Navigator
         initialRouteName="Home"
         activeColor={colors.darkBlue}
-        // barStyle={{ backgroundColor: "rgb(6, 175, 248)" }}
+        inactiveColor={colors.blue} // barStyle={{ backgroundColor: "rgb(6, 175, 248)" }}
       >
         <Tab.Screen
           name="Home"
@@ -57,15 +57,15 @@ export default function MBottomTabsNavigator() {
           name="MTopChatTabsNavigator"
           component={MTopChatTabsNavigator}
           options={{
-            tabBarLabel: "ChatBot",
+            tabBarLabel: "ChatBots",
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="wechat" color={color} size={26} />
             ),
           }}
         />
         <Tab.Screen
-          name="DocumentScreen"
-          component={DocumentsScreen}
+          name="IndexDocsScreen"
+          component={IndexDocsScreen}
           options={{
             tabBarLabel: "Tài liệu",
             tabBarIcon: ({ color }) => (

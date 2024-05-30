@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
 import { colors } from "../../../../constants/colors";
 export default function ChatBubbleCpn({ role, text, onSpeech }) {
   return (

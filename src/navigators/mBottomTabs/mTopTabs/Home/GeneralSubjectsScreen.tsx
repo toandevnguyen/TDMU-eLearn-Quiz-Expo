@@ -23,7 +23,6 @@ export default function GeneralSubjectsScreen({ navigation }) {
             navigation.navigate(
               "PlaygroundScreen",
               { category: "Triết học" }
-              // { title: "Triết học" },
             )
           }
         >

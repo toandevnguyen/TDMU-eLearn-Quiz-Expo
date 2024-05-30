@@ -33,7 +33,9 @@
       "@react-native-google-signin/google-signin",
       "expo-font",
       "react-native-add-calendar-event",
-      "expo-localization"
+      "expo-localization",
+      "@config-plugins/react-native-blob-util",
+      "@config-plugins/react-native-pdf"
     ],
     "extra": {
       "eas": {
